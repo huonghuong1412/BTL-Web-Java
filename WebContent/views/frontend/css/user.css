@@ -1,0 +1,50 @@
+.form-control {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.form-control label {
+    font-size: 1.4rem;
+    font-weight: 500;
+    width: 30%;
+}
+
+.form-control input {
+    padding: 8px 12px;
+    width: 250px;
+}
+
+/* #username:focus {
+    border: 1px solid red;
+} */
+
+.border {
+    border: 2px solid red;
+}
+
+.signup-btn {
+    padding: 16px 30px;
+    border: none;
+    background-color: var(--red-color);
+    color: #fff;
+    margin-top: 20px;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.signup-btn:focus {
+    border: none;
+    outline: none;
+}
+
+.user__page {
+    padding: 50px 0;
+}
+
+.user__page--inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}

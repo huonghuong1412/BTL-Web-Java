@@ -5,35 +5,25 @@ import models.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import Config.ConnectDB;
 
 public class CustomerDAO {
 
-	public CustomerDAO() {
-		// TODO Auto-generated constructor stub
-	}
-
-	private static final String LOGIN_CUSTOMER = "select * from customer where username =? and password =?";
-	private static final String CHECK_USERNAME = "select * from customer where username =?";
-	private static final String INSERT_CUSTOMER = "insert into customer\" + \"(username, password, address, fullname, phone) values\"  + \"(?, ?, ?, ?, ?)";
-	private static final String CHANGE_PASSWORD_CUSTOMER = "";
+	public CustomerDAO() {}
 
 	public static Customer login(String username, String password, Connection con) {
 		Customer cus = null;
 		PreparedStatement state = null;
-		String sql = "select * from customer where username='" + username + "' and password='" + password + "'";
+		String sql = "select * from customer where UserName='" + username + "' and Password='" + password + "'";
 		try {
 			state = con.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
 			if (rs.next()) {
 				cus = new Customer();
-				cus.setIdCustomer(rs.getInt("id"));
-				cus.setFullname(rs.getString("fullname"));
-				cus.setUsername(rs.getString("username"));
-				cus.setPassword(rs.getString("password"));
-				cus.setAddress(rs.getString("address"));
+				cus.setCustomerID(rs.getInt("CustomerID"));
+				cus.setFullName(rs.getString("FullName"));
+				cus.setUserName(rs.getString("UserName"));
+				cus.setPassword(rs.getString("Password"));
+				cus.setAddress(rs.getString("Address"));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -67,6 +57,27 @@ public class CustomerDAO {
 			return false;
 		}
 
+	}
+
+	public static boolean updateProfile(int id, String username, String password, String fullname, String address, String phone,
+			Connection con) {
+		PreparedStatement state = null;
+		// String updateUserSQL = "update customer set (username,password,fullname,
+		// address, phone) values('" + username
+		// + "','" + password + "','" + fullname + "','" + address + "','" + phone +
+		// "')";
+		String updateUserSQL = "update customer set username = '" + username + "', password = '" + password
+				+ "',fullname='" + fullname + "', address='" + address + "', phone='" + phone + "') where id='"+id+"'";
+		try {
+			// register
+			state = con.prepareStatement(updateUserSQL);
+			state.executeUpdate(updateUserSQL);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 }

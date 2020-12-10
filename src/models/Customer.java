@@ -1,75 +1,75 @@
 package models;
 
 public class Customer {
-	private int idCustomer;
-	private String username;
-	private String password;
-	private String address;
-	private String phone;
-	private String fullname;
+	private int CustomerID;
+	private String UserName;
+	private String Password;
+	private String Address;
+	private String Phone;
+	private String FullName;
 	
 	public Customer() {
 		
 	}
 
-	public Customer(int idCustomer, String username, String password, String address, String phone, String fullname) {
+	public Customer(int customerID, String userName, String password, String address, String phone, String fullName) {
 		super();
-		this.idCustomer = idCustomer;
-		this.username = username;
-		this.password = password;
-		this.address = address;
-		this.phone = phone;
-		this.fullname = fullname;
+		CustomerID = customerID;
+		UserName = userName;
+		Password = password;
+		Address = address;
+		Phone = phone;
+		FullName = fullName;
 	}
 
-	public int getIdCustomer() {
-		return idCustomer;
+	public int getCustomerID() {
+		return CustomerID;
 	}
 
-	public void setIdCustomer(int idCustomer) {
-		this.idCustomer = idCustomer;
+	public void setCustomerID(int customerID) {
+		CustomerID = customerID;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return UserName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
 
 	public String getPassword() {
-		return password;
+		return Password;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		Password = password;
 	}
 
 	public String getAddress() {
-		return address;
+		return Address;
 	}
 
 	public void setAddress(String address) {
-		this.address = address;
+		Address = address;
 	}
 
 	public String getPhone() {
-		return phone;
+		return Phone;
 	}
 
 	public void setPhone(String phone) {
-		this.phone = phone;
+		Phone = phone;
 	}
 
-	public String getFullname() {
-		return fullname;
+	public String getFullName() {
+		return FullName;
 	}
 
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
+	public void setFullName(String fullName) {
+		FullName = fullName;
 	}
-	
+
 	
 
 }

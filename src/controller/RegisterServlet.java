@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -51,11 +51,12 @@ public class RegisterServlet extends HttpServlet {
 		Connection conn = ConnectDB.getConnection();
 		
 		if(CustomerDAO.register(username, password, fullname, address, phone, conn) == true) {
-			RequestDispatcher dispatch = request.getRequestDispatcher("views/customer/Login.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
 			dispatch.forward(request, response);
 		} else {
-			RequestDispatcher dispatch = request.getRequestDispatcher("Register.jsp");
-			dispatch.forward(request, response);
+//			RequestDispatcher dispatch = request.getRequestDispatcher("Register.jsp");
+//			dispatch.forward(request, response);
+			response.sendRedirect("views/frontend/Home.jsp");
 		}
 		
 //		doGet(request, response);

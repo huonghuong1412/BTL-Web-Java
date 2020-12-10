@@ -2,55 +2,44 @@ package models;
 
 public class Admin {
 	
-	private int idAdmin;
-	private String username;
-	private String password;
-	private String fullname;
+	private int AdminID;
+	private String UserName;
+	private String Password;
 
 	public Admin() {
 		
 	}
 
-	public Admin(int idAdmin, String username, String password, String fullname) {
+	public Admin(int adminID, String userName, String password) {
 		super();
-		this.idAdmin = idAdmin;
-		this.username = username;
-		this.password = password;
-		this.fullname = fullname;
+		AdminID = adminID;
+		UserName = userName;
+		Password = password;
 	}
 
-	public int getIdAdmin() {
-		return idAdmin;
+	public int getAdminID() {
+		return AdminID;
 	}
 
-	public void setIdAdmin(int idAdmin) {
-		this.idAdmin = idAdmin;
+	public void setAdminID(int adminID) {
+		AdminID = adminID;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return UserName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
 
 	public String getPassword() {
-		return password;
+		return Password;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		Password = password;
 	}
 
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
 	
-	
-
 }

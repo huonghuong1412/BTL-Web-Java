@@ -36,7 +36,8 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		RequestDispatcher dispatch = request.getRequestDispatcher("Login.jsp");
+//		response.sendRedirect("views/frontend/Login.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
 		dispatch.forward(request, response);
 	}
 
@@ -52,20 +53,24 @@ public class LoginServlet extends HttpServlet {
 		
 		if(AdminDAO.login(username, password)) {
 			request.setAttribute("admin", "dmin avdvsdvsd");
-			RequestDispatcher dispatch = request.getRequestDispatcher("/views/admin/Home.jsp");
-			dispatch.forward(request, response);
+//			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
+//			dispatch.forward(request, response);
+			response.sendRedirect("views/admin/Home.jsp");
 		} else {
 			Customer customer = CustomerDAO.login(username, password, conn);
 			if(customer != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", customer);
-				session.setAttribute("fullname", customer.getFullname());
-				response.sendRedirect("views/customer/Home.jsp");
-//				RequestDispatcher dispatch = request.getRequestDispatcher("Home.jsp");
-//				dispatch.forward(request, response);
+				session.setAttribute("id", customer.getCustomerID());
+				session.setAttribute("username", customer.getUserName());
+				session.setAttribute("password", customer.getPassword());
+				session.setAttribute("fullname", customer.getFullName());
+				session.setAttribute("address", customer.getAddress());
+				session.setAttribute("phone", customer.getPhone());
+				response.sendRedirect("views/frontend/Home.jsp");
 			} else {
 				request.setAttribute("message", "Tài khoản không tồn tại");
-				RequestDispatcher dispatch = request.getRequestDispatcher("/views/customer/Login.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
 				dispatch.forward(request, response);
 			}
 		}

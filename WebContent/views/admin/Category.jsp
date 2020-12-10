@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Home page client</h1>
-	<span><%= request.getAttribute("user") %></span>
+
 </body>
 </html>
