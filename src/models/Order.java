@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.Timestamp;
+
 public class Order {
 	
 	private int OrderID;
@@ -7,6 +9,8 @@ public class Order {
 	private int TotalProduct;
 	private int Status;
 	private int CustomerID;
+	private Timestamp DateBuy;
+	private String Note;
 
 	public Order() {}
 
@@ -17,6 +21,20 @@ public class Order {
 		TotalProduct = totalProduct;
 		Status = status;
 		CustomerID = customerID;
+	}
+	
+	
+
+	public Order(int orderID, double total, int totalProduct, int status, int customerID, Timestamp dateBuy,
+			String note) {
+		super();
+		OrderID = orderID;
+		Total = total;
+		TotalProduct = totalProduct;
+		Status = status;
+		CustomerID = customerID;
+		DateBuy = dateBuy;
+		Note = note;
 	}
 
 	public int getOrderID() {
@@ -57,6 +75,22 @@ public class Order {
 
 	public void setCustomerID(int customerID) {
 		CustomerID = customerID;
+	}
+
+	public Timestamp getDateBuy() {
+		return DateBuy;
+	}
+
+	public void setDateBuy(Timestamp dateBuy) {
+		DateBuy = dateBuy;
+	}
+
+	public String getNote() {
+		return Note;
+	}
+
+	public void setNote(String note) {
+		Note = note;
 	}
 	
 	

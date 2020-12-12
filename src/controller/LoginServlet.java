@@ -35,10 +35,15 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		response.sendRedirect("views/frontend/Login.jsp");
-		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
-		dispatch.forward(request, response);
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") != null) {
+			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Home.jsp");
+			dispatch.forward(request, response);
+		} else {
+			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
+			dispatch.forward(request, response);
+		}
+		 
 	}
 
 	/**

@@ -48,3 +48,86 @@
     justify-content: center;
     width: 100%;
 }
+
+/* Account page */
+
+.account__page {
+	padding: 30px 0;
+}
+
+.account__page--title {
+    line-height: 20px;
+    font-size: 18px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.account__sidebar--title {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: left;
+    position: relative;
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+
+.account__sidebar--title:after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    content: "";
+    width: 45px;
+    height: 2px;
+    background-color: var(--red-color);
+}
+
+.account__sidebar--content {
+    margin-top: 20px;
+}
+
+.account__sidebar--link {
+    display: inline-block;
+    position: relative;
+    padding: 8px 0;
+    color: var(--text-color);
+    font-size: 1.4rem;
+}
+
+.account__info--title {
+    padding-bottom: 10px;
+    font-size: 15px;
+    margin-bottom: 10px!important;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.account__info--name {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 21px;
+    margin-bottom: 15px;
+}
+
+.account__info--email {
+    font-size: 1.4rem;
+    color: var(--text-color);
+    margin-top: 15px;
+}
+
+
+.btn-cancel {
+    padding: 16px 30px;
+    border: none;
+    background-color: #e1e1e1;
+    color: var(--text-color);
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+}
+
+

@@ -46,14 +46,6 @@ public class ProductDAO {
 		try {
 			state = conn.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
-//			rs.next();
-//			product.setProductID(rs.getInt("ProductID"));
-//			product.setProductName(rs.getString("ProductName"));
-//			product.setPrice(rs.getDouble("Price"));
-//			product.setQuantity(rs.getInt("Quantity"));
-//			product.setDescription(rs.getString("Description"));
-//			product.setImage(rs.getString("Image"));
-//			product.setMaterial(rs.getString("Material"));
 			while(rs.next()) {
 				int productID = rs.getInt("ProductID");
 				String productName = rs.getString("ProductName");
@@ -133,9 +125,34 @@ public class ProductDAO {
 		return list;
 	}
 	
-//	public static List<Product> getProductByCartID (Connection conn, int cartID) {
-//		List<>
-//	}
+	public static List<Product> searchProduct (Connection conn, String text) {
+		List<Product> list = new ArrayList<Product>();
+		
+		PreparedStatement state = null;
+		String sql = "select * from product where ProductName like " + "'%" + text + "%'";
+		System.out.print(sql);
+		
+		try {
+			state = conn.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) {
+				int productID = rs.getInt("ProductID");
+				String productName = rs.getString("ProductName");
+				double price = rs.getDouble("Price");
+				int quantity = rs.getInt("Quantity");
+				String description = rs.getString("Description");
+				String image = rs.getString("Image");
+				String material = rs.getString("Material");
+				int categoryID = rs.getInt("CategoryID");
+				list.add(new Product(productID, productName, price, quantity, image, description, material, categoryID));
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	public static boolean insertProduct(Product product, Connection conn, int category) {
 		PreparedStatement state = null;

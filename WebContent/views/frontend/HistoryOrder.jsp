@@ -12,23 +12,25 @@
 <link rel="stylesheet" href="views/frontend/css/grid.css">
 <link rel="stylesheet" href="views/frontend/css/common.css">
 <link rel="stylesheet" href="views/frontend/css/home.css">
-<link rel="stylesheet" href="views/frontend/css/cart.css">
+<link rel="stylesheet" href="views/frontend/css/user.css">
 <link rel="stylesheet" href="views/frontend/css/responsive.css">
 <title>Thời trang Enda</title>
 </head>
 <body>
-<%@include file="Header.jsp"%>
 
-<div class="bg-banner">
+	<%@include file="Header.jsp"%>
+
+	<div class="bg-banner">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12">
-					<h3 class="bg-banner-title">Giỏ hàng</h3>
+					<h3 class="bg-banner-title">Lịch sử đặt hàng</h3>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
+
 	<%@include file="Footer.jsp"%>
 
 

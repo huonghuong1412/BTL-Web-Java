@@ -13,17 +13,15 @@
 				class="header__logo-img" src="views/frontend/img/logo.jpg" alt="">
 			</a>
 		</div>
-		<div class="header__main--search">
+		<form class="header__main--search" action="<%= request.getContextPath()%>/SearchServlet" method="post">
 			<input type="text" class="header__main--search-input"
-				placeholder="Tìm kiếm" name="textSearch"> <a
-				href="/search/keyword/" class="header__main--search-btn"> <i
-				class="fas fa-search"></i>
-			</a>
-		</div>
+				placeholder="Tìm kiếm" name="search"> 
+				<button type="submit" class="header__main--search-btn"> 
+					<i class="fas fa-search"></i>
+				</button>
+		</form>
 		<div class="header__aside">
 			<div class="header__aside--info">
-
-
 				<c:choose>
 					<c:when test="${sessionScope.user != null}">
 						<ul class="header__aside--info-top">
@@ -47,7 +45,7 @@
 				</div>
 			</div>
 			<div class="header__aside--cart">
-				<a class="header__aside--cart-icon" href="./cart.html"> <img
+				<a class="header__aside--cart-icon" href="<%=request.getContextPath()%>/CartServlet"> <img
 					src="views/frontend/img/cart.jpg" alt=""> <span
 					class="header__aside--cart-quantity">0</span>
 				</a>
@@ -76,9 +74,9 @@
 						</div>
 						<div class="header__aside--cart-total-bottom">
 							<a class="header__aside--cart-total-link addtocart"
-								href="./cart.html">Xem giỏ hàng</a> <a
+								href="<%=request.getContextPath()%>/CartServlet">Xem giỏ hàng</a> <a
 								class="header__aside--cart-total-link checkout"
-								href="./order.html">Thanh toán</a>
+								href="<%=request.getContextPath()%>/OrderServlet">Thanh toán</a>
 						</div>
 					</div>
 				</div>

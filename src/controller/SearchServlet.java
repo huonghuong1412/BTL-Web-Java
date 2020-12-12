@@ -1,6 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +11,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Config.ConnectDB;
+import DAO.ProductDAO;
+import models.Product;
+
 /**
- * Servlet implementation class ProfileServlet
+ * Servlet implementation class SearchServlet
  */
-@WebServlet("/ProfileServlet")
-public class ProfileServlet extends HttpServlet {
+@WebServlet("/SearchServlet")
+public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ProfileServlet() {
+	public SearchServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -29,8 +36,7 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Profile.jsp");
-		rd.forward(request, response);
+		doPost(request, response);
 	}
 
 	/**
@@ -39,8 +45,13 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/UpdateProfile.jsp");
-		rd.forward(request, response);
+		Connection conn = ConnectDB.getConnection();
+		List<Product> listProduct = null;
+		String text = request.getParameter("search");
+		listProduct = ProductDAO.searchProduct(conn, text);
+		request.setAttribute("products", listProduct);
+		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/SearchProduct.jsp");
+		dispatch.forward(request, response);
 	}
 
 }
