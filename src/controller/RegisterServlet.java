@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
+		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Register.jsp");
 		dispatch.forward(request, response);
 	}
 

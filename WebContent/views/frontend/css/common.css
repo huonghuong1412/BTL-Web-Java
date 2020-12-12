@@ -30,6 +30,14 @@ input:focus {
     outline: none !important;
 }
 
+select:focus {
+	outline: none !important;
+}
+
+textarea:focus {
+	outline: none !important;
+}
+
 .text-center {
     text-align: center;
 }
@@ -613,6 +621,7 @@ input:focus {
     display: inline-block;
     color: var(--text-color);
     font-size: 1.4rem;
+    padding: 10px;
 }
 
 .products__item--actions-detail {
@@ -647,6 +656,7 @@ input:focus {
     font-size: 1.4rem;
     line-height: 2rem;
     color: var(--text-red-color);
+    margin-top: 10px;
 }
 
 

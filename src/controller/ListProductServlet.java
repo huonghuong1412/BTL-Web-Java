@@ -47,10 +47,10 @@ public class ListProductServlet extends HttpServlet {
 		String page = request.getParameter("page");
 		if (page == null) {
 			listProduct = ProductDAO.getListProductByCategory(conn, category, 1);
-			request.setAttribute("listProduct", listProduct);
-			request.setAttribute("listCount", ProductDAO.getCountProducts(conn, category));
+			request.setAttribute("products", listProduct);
+			request.setAttribute("count", ProductDAO.getCountProducts(conn, category));
 			request.setAttribute("category", category);
-			request.setAttribute("currentPage", 1);
+			request.setAttribute("currentpage", 1);
 			
 			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/ListProduct.jsp");
 			dispatch.forward(request, response);
@@ -60,7 +60,7 @@ public class ListProductServlet extends HttpServlet {
 			request.setAttribute("products", listProduct);
 			request.setAttribute("count", ProductDAO.getCountProducts(conn, category));
 			request.setAttribute("category", category);
-			request.setAttribute("currentPage", Integer.parseInt(page));
+			request.setAttribute("currentpage", Integer.parseInt(page));
 			
 			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/ListProduct.jsp");
 			dispatch.forward(request, response);

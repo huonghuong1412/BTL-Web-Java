@@ -64,10 +64,10 @@ function checkRegister() {
 }
 
 function checkLogin() {
-    var email = document.getElementById('email').value;
+    var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
-    if (email === "") {
-        alert("Nhập email");
+    if (username === "") {
+        alert("Nhập username");
         return false;
     } else if (password === "") {
         alert("Nhập mật khẩu");

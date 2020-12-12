@@ -22,10 +22,9 @@ public class ProductDAO {
 			sql = "select count(*) from product";
 		} else {
 			sql = "select count(*)\r\n" + 
-					"from product,category,product_category\r\n" + 
-								"where category.CategoryName='" + category + "'\r\n" + "	"
-										+ "and category.CategoryID=product_category.CategoryID\r\n"
-								+ "and product.ProductID=product_category.ProductID";
+					"from product,category\r\n" + 
+								"where category.CategoryName='" + category + "'\r\n"
+								+ "and product.CategoryID=category.CategoryID";
 		}
 		try {
 			state = conn.prepareStatement(sql);
@@ -39,21 +38,33 @@ public class ProductDAO {
 	}
 
 	public static Product getProductById(int id, Connection conn) {
-		Product product = new Product();
+//		Product product = new Product();
+		Product product = null;
 		PreparedStatement state = null;
 		String sql = "select * from product where ProductID=" + id;
 
 		try {
 			state = conn.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
-			rs.next();
-			product.setProductID(rs.getInt("ProductID"));
-			product.setProductName(rs.getString("ProductName"));
-			product.setPrice(rs.getDouble("Price"));
-			product.setQuantity(rs.getInt("Quantity"));
-			product.setDescription(rs.getString("Description"));
-			product.setImage(rs.getString("Image"));
-			product.setMaterial(rs.getString("Material"));
+//			rs.next();
+//			product.setProductID(rs.getInt("ProductID"));
+//			product.setProductName(rs.getString("ProductName"));
+//			product.setPrice(rs.getDouble("Price"));
+//			product.setQuantity(rs.getInt("Quantity"));
+//			product.setDescription(rs.getString("Description"));
+//			product.setImage(rs.getString("Image"));
+//			product.setMaterial(rs.getString("Material"));
+			while(rs.next()) {
+				int productID = rs.getInt("ProductID");
+				String productName = rs.getString("ProductName");
+				double price = rs.getDouble("Price");
+				int quantity = rs.getInt("Quantity");
+				String description = rs.getString("Description");
+				String image = rs.getString("Image");
+				String material = rs.getString("Material");
+				int categoryID = rs.getInt("CategoryID");
+				product = new Product(productID, productName, price, quantity, image, description, material, categoryID);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -66,34 +77,29 @@ public class ProductDAO {
 		
 		PreparedStatement state = null;
 		String sql = "";
+		
 		if(category.contentEquals("all")) {
-			sql = "select * from product limit 12 offset "+(page-1)*12;;
+			sql = "select * from product limit 12 offset "+(page-1)*12;
 		} else {
-//			sql="select product.*\r\n" + 
-//					"from product,category,product_category\r\n" + 
-//					"where category.CategoryName='"+category+"'\r\n" + 
-//					"	and category.CategoryID=product_category.CategoryID\r\n" + 
-//					"    and product.ProductID=product_category.ProductID limit 12 offset "+(page-1)*12;
-			sql = "SELECT product.*\r\n" + 
-					"from product, category, product_catogory" + 
-					"where category.CategoryName ="+category+"" + 
-					"and category.CategoryID = product_catogory.CategoryID" + 
-					"and product.ProductID = product_catogory.ProductID";
+			sql = "select product.*\r\n" + 
+					"from product,category\r\n" + 
+					"where category.CategoryName='" + category + "'\r\n"
+					+ "and product.CategoryID=category.CategoryID limit 12 offset "+(page-1)*12;
 		}
 		
 		try {
 			state = conn.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
 			while(rs.next()) {
-				Product product = new Product();
-				product.setProductID(rs.getInt("ProductID"));
-				product.setProductName(rs.getString("ProductName"));
-				product.setPrice(rs.getDouble("Price"));
-				product.setQuantity(rs.getInt("Quantity"));
-				product.setDescription(rs.getString("Description"));
-				product.setImage(rs.getString("Image"));
-				product.setMaterial(rs.getString("Material"));
-				list.add(product);
+				int productID = rs.getInt("ProductID");
+				String productName = rs.getString("ProductName");
+				double price = rs.getDouble("Price");
+				int quantity = rs.getInt("Quantity");
+				String description = rs.getString("Description");
+				String image = rs.getString("Image");
+				String material = rs.getString("Material");
+				int categoryID = rs.getInt("CategoryID");
+				list.add(new Product(productID, productName, price, quantity, image, description, material, categoryID));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -126,6 +132,10 @@ public class ProductDAO {
 		}
 		return list;
 	}
+	
+//	public static List<Product> getProductByCartID (Connection conn, int cartID) {
+//		List<>
+//	}
 	
 	public static boolean insertProduct(Product product, Connection conn, int category) {
 		PreparedStatement state = null;

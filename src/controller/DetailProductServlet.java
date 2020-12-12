@@ -45,7 +45,7 @@ public class DetailProductServlet extends HttpServlet {
 		Product product = ProductDAO.getProductById(id, conn);
 		request.setAttribute("product", product);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("views/fronted/ProductDetail.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/ProductDetail.jsp");
 		rd.forward(request, response);
 	}
 

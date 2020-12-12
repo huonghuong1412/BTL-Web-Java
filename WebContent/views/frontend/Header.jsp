@@ -48,7 +48,7 @@
 			</div>
 			<div class="header__aside--cart">
 				<a class="header__aside--cart-icon" href="./cart.html"> <img
-					src="./img//cart.jpg" alt=""> <span
+					src="views/frontend/img/cart.jpg" alt=""> <span
 					class="header__aside--cart-quantity">0</span>
 				</a>
 				<div class="header__aside--cart-content">

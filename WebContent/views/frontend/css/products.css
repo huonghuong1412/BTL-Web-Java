@@ -1,5 +1,5 @@
 .main__content {
-    margin-top: 50px;
+    padding: 50px 0; 
 }
 
 .main__content--inner {
@@ -27,3 +27,167 @@
     text-transform: uppercase;
 }
 
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .page-item {
+    padding: 5px 12px;
+} */
+
+.page-link {
+    position: relative;
+    font-size: 18px;
+    font-weight: 600;
+    transition: .5s ease;
+    cursor: pointer;
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    border: 1px solid #dc5139;
+    color: #333;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-btn {
+        border: 0;
+        height: 36px;
+        min-width: 75px;
+        margin: 0 10px;
+        position: relative;
+        background-color: #2ecc71;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        font-weight: 600;
+}
+
+.page-prev:after {
+    left: -18px;
+    border-right: 18px solid #2ecc71;
+}
+
+.page-next:after {
+    right: -18px;
+    border-left: 18px solid #2ecc71;
+}
+
+.page-next:after, 
+.page-prev:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    border-top: 18px solid transparent;
+    border-bottom: 18px solid transparent;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  /* Modal Content/Box */
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .modal-header {
+    padding: 15px 0;
+    text-align: center;
+    position: relative;
+    background: var(--red-color);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    border-top-left-radius: .3rem;
+    border-top-right-radius: .3rem;
+}
+
+.modal-title {
+    color: var(--white-color);
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.3rem;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+
+.close {
+    color: var(--white-color);
+    font-size: 1.3rem;
+    border: 0;
+    background-color: transparent;
+}
+
+.quickview-image img {
+    max-width: 100%;
+    max-height: 300px;
+    margin-bottom: 5px;
+}
+
+.quickview-price {
+    border-bottom: 1px solid #e2e01a;
+    padding-bottom: 12px;
+    margin-top: 10px;
+    width: 50%;
+}
+
+.quickview-price span {
+    font-size: 24px;
+    color: #db2121;
+    margin-right: 25px;
+}
+
+.form-add {
+    display: flex;
+    align-items: center;
+}
+
+.qv-readmore {
+    padding: 16px 10px;
+}
+
+.qv-readmore span {
+    font-size: 1.4rem;
+}
+.read-more {
+    font-size: 1.3rem;
+}

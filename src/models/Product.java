@@ -9,21 +9,23 @@ public class Product {
 	private String Image;
 	private String Description;
 	private String Material;
+	private int CategoryID;
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Product(int productID, String productName, double price, int quantity, String image, String description,
-			String material) {
+			String material, int categoryID) {
 		super();
-		ProductID = productID;
-		ProductName = productName;
-		Price = price;
-		Quantity = quantity;
-		Image = image;
-		Description = description;
-		Material = material;
+		this.ProductID = productID;
+		this.ProductName = productName;
+		this.Price = price;
+		this.Quantity = quantity;
+		this.Image = image;
+		this.Description = description;
+		this.Material = material;
+		this.CategoryID = categoryID;
 	}
 
 	public int getProductID() {
@@ -80,6 +82,14 @@ public class Product {
 
 	public void setMaterial(String material) {
 		Material = material;
+	}
+
+	public int getCategoryID() {
+		return CategoryID;
+	}
+
+	public void setCategoryID(int categoryID) {
+		CategoryID = categoryID;
 	}
 
 	

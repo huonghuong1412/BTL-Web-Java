@@ -53,9 +53,9 @@ public class LoginServlet extends HttpServlet {
 		
 		if(AdminDAO.login(username, password)) {
 			request.setAttribute("admin", "dmin avdvsdvsd");
-//			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
-//			dispatch.forward(request, response);
-			response.sendRedirect("views/admin/Home.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
+			dispatch.forward(request, response);
+//			response.sendRedirect("views/admin/Home.jsp");
 		} else {
 			Customer customer = CustomerDAO.login(username, password, conn);
 			if(customer != null) {
