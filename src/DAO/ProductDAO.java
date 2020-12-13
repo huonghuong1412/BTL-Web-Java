@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.ConnectDB;
 import models.Product;
 
 public class ProductDAO {
@@ -37,12 +38,12 @@ public class ProductDAO {
 		return count;
 	}
 
-	public static Product getProductById(int id, Connection conn) {
-//		Product product = new Product();
+	public static Product getProductById(int id) {
 		Product product = null;
 		PreparedStatement state = null;
+		Connection conn = ConnectDB.getConnection();
 		String sql = "select * from product where ProductID=" + id;
-
+		
 		try {
 			state = conn.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -152,6 +153,33 @@ public class ProductDAO {
 		}
 		
 		return list;
+	}
+	
+	public Product getProductByIdCart(int id) {
+		Product product = null;
+		PreparedStatement state = null;
+		Connection conn = ConnectDB.getConnection();
+		String sql = "select * from product where ProductID=" + id;
+		
+		try {
+			state = conn.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while(rs.next()) {
+				int productID = rs.getInt("ProductID");
+				String productName = rs.getString("ProductName");
+				double price = rs.getDouble("Price");
+				int quantity = rs.getInt("Quantity");
+				String description = rs.getString("Description");
+				String image = rs.getString("Image");
+				String material = rs.getString("Material");
+				int categoryID = rs.getInt("CategoryID");
+				product = new Product(productID, productName, price, quantity, image, description, material, categoryID);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return product;
 	}
 	
 	public static boolean insertProduct(Product product, Connection conn, int category) {

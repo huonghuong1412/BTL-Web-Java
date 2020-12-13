@@ -5,36 +5,31 @@ import java.sql.Timestamp;
 public class Order {
 	
 	private int OrderID;
-	private double Total;
-	private int TotalProduct;
-	private int Status;
 	private int CustomerID;
+	private int ProductID;
+	private double UnitPrice;
+	private int Quantity;
+	private int Status;
 	private Timestamp DateBuy;
 	private String Note;
-
+	private String Phone;
+	private String Address;
+	
 	public Order() {}
 
-	public Order(int orderID, double total, int totalProduct, int status, int customerID) {
+	public Order(int orderID, int customerID, int productID, double unitPrice, int quantity, int status, Timestamp dateBuy,
+			String note, String phone, String address) {
 		super();
 		OrderID = orderID;
-		Total = total;
-		TotalProduct = totalProduct;
-		Status = status;
 		CustomerID = customerID;
-	}
-	
-	
-
-	public Order(int orderID, double total, int totalProduct, int status, int customerID, Timestamp dateBuy,
-			String note) {
-		super();
-		OrderID = orderID;
-		Total = total;
-		TotalProduct = totalProduct;
+		ProductID = productID;
+		UnitPrice = unitPrice;
+		Quantity = quantity;
 		Status = status;
-		CustomerID = customerID;
 		DateBuy = dateBuy;
 		Note = note;
+		Phone = phone;
+		Address = address;
 	}
 
 	public int getOrderID() {
@@ -45,20 +40,36 @@ public class Order {
 		OrderID = orderID;
 	}
 
-	public double getTotal() {
-		return Total;
+	public int getCustomerID() {
+		return CustomerID;
 	}
 
-	public void setTotal(double total) {
-		Total = total;
+	public void setCustomerID(int customerID) {
+		CustomerID = customerID;
 	}
 
-	public int getTotalProduct() {
-		return TotalProduct;
+	public int getProductID() {
+		return ProductID;
 	}
 
-	public void setTotalProduct(int totalProduct) {
-		TotalProduct = totalProduct;
+	public void setProductID(int productID) {
+		ProductID = productID;
+	}
+
+	public double getUnitPrice() {
+		return UnitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		UnitPrice = unitPrice;
+	}
+
+	public int getQuantity() {
+		return Quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		Quantity = quantity;
 	}
 
 	public int getStatus() {
@@ -67,14 +78,6 @@ public class Order {
 
 	public void setStatus(int status) {
 		Status = status;
-	}
-
-	public int getCustomerID() {
-		return CustomerID;
-	}
-
-	public void setCustomerID(int customerID) {
-		CustomerID = customerID;
 	}
 
 	public Timestamp getDateBuy() {
@@ -92,7 +95,23 @@ public class Order {
 	public void setNote(String note) {
 		Note = note;
 	}
-	
+
+	public String getPhone() {
+		return Phone;
+	}
+
+	public void setPhone(String phone) {
+		Phone = phone;
+	}
+
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
+	}
+
 	
 
 }

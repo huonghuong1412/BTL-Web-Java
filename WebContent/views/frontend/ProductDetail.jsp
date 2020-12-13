@@ -89,19 +89,9 @@
 										class="selector-wrapper-input" type="number" name="quantity"
 										min="1" value="1">
 								</div>
-								<div class="selector-wrapper">
-									<label>Size</label>
-									<select name="size" class="selector-wrapper-input">
-										<option value="M">M</option>
-										<option value="L">L</option>
-										<option value="XL">XL</option>
-									</select>
-								</div>
 								<div class="add-item-btn">
-									<button id="add-to-cart" class="btn-detail btn-color-add"
-										name="add">Thêm vào giỏ</button>
-									<button id="buy-now" class="btn-detail btn-color-buy">Mua
-										ngay</button>
+									<a id="add-to-cart" class="btn-detail btn-color-add" href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }"
+										name="add">Thêm vào giỏ</a>
 								</div>
 							</div>
 						</div>

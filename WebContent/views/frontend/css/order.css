@@ -178,6 +178,7 @@ tr.product {
     text-align: right!important;
     display: flex;
     align-items: center;
+    width: 65px;
 }
 
 .checkout__amount {
@@ -240,6 +241,7 @@ tr.product {
     background-color: #357ebd;
     color: #fff;
     border: 1px solid #357ebd;
-    margin-left: 15px;
     cursor: pointer;
+    line-height: 45px;
+    font-size: 1.6rem;
 }

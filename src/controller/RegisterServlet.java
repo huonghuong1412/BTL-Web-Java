@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import Config.ConnectDB;
 import DAO.CustomerDAO;
+import common.ConnectDB;
 
 /**
  * Servlet implementation class RegisterServlet

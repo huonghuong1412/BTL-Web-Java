@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import common.ConnectDB;
 import models.Category;
 
 public class CategoryDAO {
@@ -14,8 +15,9 @@ public class CategoryDAO {
 
 	}
 
-	public static List<Category> getAllCategory(Connection conn) {
-		List<Category> list = new ArrayList<Category>();
+	public List<Category> getAllCategory() {
+		Connection conn = ConnectDB.getConnection();
+		List<Category> list = new ArrayList<>();
 		PreparedStatement state = null;
 		String sql = "select * from category";
 
@@ -24,9 +26,9 @@ public class CategoryDAO {
 			ResultSet rs = state.executeQuery();
 			while (rs.next()) {
 				Category category = new Category();
-				category.setCategoryID(rs.getInt("idCategory"));
-				category.setCategoryName(rs.getString("nameCategory"));
-				;
+				category.setCategoryID(rs.getInt("CategoryID"));
+				category.setCategoryName(rs.getString("CategoryName"));
+				list.add(category);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

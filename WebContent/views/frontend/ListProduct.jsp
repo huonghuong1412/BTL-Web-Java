@@ -46,22 +46,22 @@
 									href="<%=request.getContextPath()%>/ListProductServlet?category=all">Tất
 										cả sản phẩm</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=ao-khoac">Áo
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Áo khoác">Áo
 										khoác</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=ao">Áo</a></li>
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Áo">Áo</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=quan">Quần</a></li>
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Quần">Quần</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=vay-dam">Váy
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Váy đầm">Váy
 										đầm</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=bo-mac-nha">Bộ
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Bộ mặc nhà">Bộ
 										mặc nhà</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=giay">Giày</a></li>
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Giày">Giày</a></li>
 								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=tui-xach">Túi
+									href="<%=request.getContextPath()%>/ListProductServlet?category=Túi xách">Túi
 										xách</a></li>
 							</ul>
 						</div>
@@ -90,10 +90,10 @@
 													</a>
 													<div class="products__item--actions">
 														<div class="products__item--actions-cart">
-															<button type="button"
+															<a href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }"
 																class="products__item--actions-link" id="button-bag">
 																<i class="fa fa-shopping-bag"></i>
-															</button>
+															</a>
 														</div>
 														<div class="products__item--actions-detail">
 															<a class="products__item--actions-link"

@@ -1,9 +1,15 @@
 package DAO;
 
+import models.Product;
+
 public class CartDAO {
 
 	public CartDAO() {
-		// TODO Auto-generated constructor stub
+		
+	}
+	
+	public static void addToCart(Product product, int quantity) {
+		
 	}
 
 }

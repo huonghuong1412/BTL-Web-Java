@@ -17,25 +17,23 @@
 <title>Thời trang Enda</title>
 </head>
 <body>
-<%@include file="Header.jsp"%>
+	<%@include file="Header.jsp"%>
+
+	<%
+		String username = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("username")) {
+					username = cookie.getValue();
+				}
+			}
+		}
+	%>
+
 	<div class="checkout__page">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4 col-md-12 col-sm-12">
-					<h1 class="checkout__info--title">Thông tin mua và nhận
-						hàng</h1>
-					<div class="contact-form-group">
-						<input type="text" placeholder="Họ và tên" name="name"
-							class="contact-form-group-input" required="" value=""> <input
-							type="email" placeholder="Email" name="email"
-							class="contact-form-group-input" required="" value=""> <input
-							type="text" placeholder="Số điện thoại" name="phone"
-							class="contact-form-group-input" required="" value=""> <input
-							type="text" placeholder="Địa chỉ" name="address"
-							class="contact-form-group-input" required="" value="">
-						<textarea placeholder="Ghi chú" rows="3" cols="5" name="note"></textarea>
-					</div>
-				</div>
 				<div class="col-lg-4 col-md-12 col-sm-12">
 					<h1 class="checkout__info--title">Vận chuyển</h1>
 					<div class="content-box">
@@ -72,70 +70,62 @@
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-12 col-sm-12">
-					<h1 class="checkout__info--title">Đơn hàng (4 sản phẩm)</h1>
+					<h1 class="checkout__info--title">Đơn hàng</h1>
 					<div class="checkout__sidebar">
 						<div class="checkout__summary">
 							<div class="checkout__item">
 								<table class="product-table">
+									<%
+										ProductDAO productDAO = new ProductDAO();
+										double total = 0;
+										ArrayList<Cart> cart = null;
+										if (session.getAttribute("cart") != null) {
+											cart = (ArrayList<Cart>) session.getAttribute("cart");
+										}
+									%>
 									<tbody>
+										<%
+											if (cart != null) {
+												for (Cart c : cart) {
+													total = total + (c.getQuantity()
+															* productDAO.getProductByIdCart(c.getProduct().getProductID()).getPrice());
+										%>
+
 										<tr class="product">
 											<td class="product__image">
 												<div class="product-thumbnail">
 													<div class="product-thumbnail__wrapper">
-														<img src="./img/giay-1.jpg" alt=""
-															class="product-thumbnail__image">
+														<img
+															src="Contents/Image/Product/<%=productDAO.getProductById(c.getProduct().getProductID()).getImage()%>"
+															alt="" class="product-thumbnail__image">
 													</div>
-													<span class="product-thumbnail__quantity">2</span>
+													<span class="product-thumbnail__quantity"><%=c.getQuantity()%></span>
 												</div>
 											</td>
 											<th class="product__description"><span
-												class="product__description__name">A1527-Áo Len
-													Cotton Cổ V Sọc Ngang Túi Lệch</span> <span
-												class="product__description__property">A1527</span></th>
-											<td class="product__quantity">2</td>
-											<td class="product__price">936,000₫</td>
+												class="product__description__name"> <%=productDAO.getProductByIdCart(c.getProduct().getProductID()).getProductName()%>
+											</span> <span class="product__description__property"><%=productDAO.getProductByIdCart(c.getProduct().getProductID()).getMaterial()%></span></th>
+											<td class="product__quantity"><%=c.getQuantity()%></td>
+											<td class="product__price"><fmt:setLocale value="vi-VN" />
+												<fmt:formatNumber
+													value="<%=productDAO.getProductByIdCart(c.getProduct().getProductID()).getPrice() * c.getQuantity()%>"
+													type="currency" /></td>
 										</tr>
-										<tr class="product">
-											<td class="product__image">
-												<div class="product-thumbnail">
-													<div class="product-thumbnail__wrapper">
-														<img src="./img/giay-2.jpg" alt=""
-															class="product-thumbnail__image">
-													</div>
-													<span class="product-thumbnail__quantity">1</span>
-												</div>
-											</td>
-											<th class="product__description"><span
-												class="product__description__name">Q1004-Quần Jean
-													Harem Ống Bo Co Dãn Điểm Túi</span> <span
-												class="product__description__property">Q1004-1</span></th>
-											<td class="product__quantity">1</td>
-											<td class="product__price">568,000₫</td>
-										</tr>
-										<tr class="product">
-											<td class="product__image">
-												<div class="product-thumbnail">
-													<div class="product-thumbnail__wrapper">
-														<img src="./img/giay-3.jpg" alt=""
-															class="product-thumbnail__image">
-													</div>
-													<span class="product-thumbnail__quantity">1</span>
-												</div>
-											</td>
-											<th class="product__description"><span
-												class="product__description__name">AK0214-Áo Khoác
-													Len Dệt Kim Kẻ Sọc Túi Once</span> <span
-												class="product__description__property">AK0214-1</span></th>
-											<td class="product__quantity">1</td>
-											<td class="product__price">598,000₫</td>
-										</tr>
+
+										<%
+											}
+											}
+										%>
 									</tbody>
 								</table>
 							</div>
 							<div class="checkout__amount">
 								<h3 class="checkout__amount-item">
 									<span class="checkout__amount--title">Tạm tính</span> <span
-										class="checkout__amount--price">2,102,000₫</span>
+										class="checkout__amount--price"> <fmt:setLocale
+											value="vi-VN" /> <fmt:formatNumber value="<%=total%>"
+											type="currency" />
+									</span>
 								</h3>
 								<h3 class="checkout__amount-item">
 									<span class="checkout__amount--title">Phí vận chuyển</span>
@@ -143,18 +133,54 @@
 								</h3>
 								<h3 class="checkout__amount-item total-price">
 									<span class="checkout__amount--title">Tổng cộng</span> <span
-										class="checkout__amount--price">2,102,000₫</span>
+										class="checkout__amount--price"><fmt:formatNumber
+											value="<%=total%>" type="currency" /></span>
 								</h3>
-							</div>
-							<div class="checkout__btn">
-								<a class="previous-link" href="./cart.html"> <i
-									class="previous-link__arrow">❮</i>Quay về giỏ hàng
-								</a>
-								<button href="./detail.html" class="checkout__voucher--btn"
-									onclick="alert('Đặt hàng thành công')">ĐẶT HÀNG</button>
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="col-lg-4 col-md-12 col-sm-12">
+					<h1 class="checkout__info--title">Thông tin mua và nhận
+						hàng</h1>
+					<form class="contact-form-group" action="<%=request.getContextPath()%>/OrderServlet?username=<%=username%>&total=<%=total%>" method="post">
+						<input 
+							type="text" 
+							placeholder="Họ và tên" 
+							name="fullname"
+							class="contact-form-group-input" 
+							required=""
+							value="<%=session.getAttribute("fullname")%>"> 
+							
+							<input
+								type="text" 
+								placeholder="Số điện thoại" 
+								name="phone"
+								class="contact-form-group-input" 
+								required=""
+								value="<%=session.getAttribute("phone")%>"> 
+							
+							<input
+								type="text" 
+								placeholder="Địa chỉ" 
+								name="address"
+								class="contact-form-group-input" 
+								required=""
+								value="<%=session.getAttribute("address")%>">
+							
+							<textarea 
+								placeholder="Ghi chú" 
+								rows="3" 
+								cols="5" 
+								name="note">
+							</textarea>
+							
+							<div class="checkout__btn">
+								<button type="submit"
+									class="checkout__voucher--btn"
+									onclick="alert('Đặt hàng thành công')">ĐẶT HÀNG</button>
+							</div>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -92,6 +92,4 @@ public class Product {
 		CategoryID = categoryID;
 	}
 
-	
-
 }

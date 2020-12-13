@@ -1,8 +1,6 @@
 package DAO;
 
-import models.Cart;
 import models.Customer;
-import models.Product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -78,25 +76,6 @@ public class CustomerDAO {
 			e.printStackTrace();
 			return false;
 		}
-	}
-
-	public static Cart getCartById(int id, Connection conn) {
-		Cart cart = null;
-		PreparedStatement state = null;
-		String sql = "select * from cart where CustomerID = " + id;
-		try {
-			state = conn.prepareStatement(sql);
-			ResultSet rs = state.executeQuery();
-			if (rs.next()) {
-				int cartID = rs.getInt("CartID");
-				int count = rs.getInt("Count");
-				int customerID = rs.getInt("CustomerID");
-				cart = new Cart(cartID, count, customerID);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		return cart;
 	}
 
 }

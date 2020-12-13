@@ -6,14 +6,15 @@ import java.sql.Connection;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import Config.ConnectDB;
 import DAO.AdminDAO;
 import DAO.CustomerDAO;
+import common.ConnectDB;
 import models.Customer;
 
 /**
@@ -72,6 +73,12 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("fullname", customer.getFullName());
 				session.setAttribute("address", customer.getAddress());
 				session.setAttribute("phone", customer.getPhone());
+				
+				session.setMaxInactiveInterval(10*60);
+				
+				Cookie loginCookie = new Cookie("username", username);
+				loginCookie.setMaxAge(10*60); 	// 10 phut
+				response.addCookie(loginCookie);
 				response.sendRedirect("views/frontend/Home.jsp");
 			} else {
 				request.setAttribute("message", "Tài khoản không tồn tại");

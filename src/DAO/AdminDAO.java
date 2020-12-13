@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import Config.ConnectDB;
+import common.ConnectDB;
 
 public class AdminDAO {
 
