@@ -56,10 +56,10 @@
 													</a>
 													<div class="products__item--actions">
 														<div class="products__item--actions-cart">
-															<button type="button"
+															<a href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }"
 																class="products__item--actions-link" id="button-bag">
 																<i class="fa fa-shopping-bag"></i>
-															</button>
+															</a>
 														</div>
 														<div class="products__item--actions-detail">
 															<a class="products__item--actions-link"

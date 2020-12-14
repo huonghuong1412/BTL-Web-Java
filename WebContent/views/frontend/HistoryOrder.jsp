@@ -30,6 +30,61 @@
 		</div>
 	</div>
 
+	<div class="user__page">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-sm-12 col-md-12">
+					<div class="table-responsive">
+						<table class="table order-table"
+							style="border: 1px solid rgb(225, 225, 225);">
+							<thead>
+								<tr>
+									<th style="border: 1px solid rgb(0, 0, 0);">Tên Sản phẩm</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">Loại Sản phẩm</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">Số lượng</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">Đơn giá</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">Thành tiền</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">Ngày mua</th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="history" items="${histories}">
+								<tr>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										${history.productName}
+									</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										${history.categoryName}
+									</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										${history.quantity}
+									</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										${history.unitPrice}
+									</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										${history.thanhTien}
+									</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										${history.dateBuy}
+									</th>
+								</tr>
+							</c:forEach>
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="col-lg-12 col-md-12 col-sm-12">
+					<div class="jumbotron text-center">
+						<a class="back-btn" href="<%=request.getContextPath()%>/IndexServlet">Trở lại
+							trang chủ</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<%@include file="Footer.jsp"%>
 

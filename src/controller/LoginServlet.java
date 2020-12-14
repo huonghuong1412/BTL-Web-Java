@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 
 import javax.servlet.RequestDispatcher;
@@ -12,9 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.AdminDAO;
 import DAO.CustomerDAO;
 import common.ConnectDB;
+import common.HashPassword;
 import models.Customer;
 
 /**
@@ -23,48 +24,49 @@ import models.Customer;
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user") != null) {
+		if (session.getAttribute("user") != null) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Home.jsp");
 			dispatch.forward(request, response);
 		} else {
 			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
 			dispatch.forward(request, response);
 		}
-		 
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		Connection conn = ConnectDB.getConnection();
-		
-		if(AdminDAO.login(username, password)) {
-			request.setAttribute("admin", "dmin avdvsdvsd");
-			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
-			dispatch.forward(request, response);
-//			response.sendRedirect("views/admin/Home.jsp");
-		} else {
+
+		try {
+			password = HashPassword.hashMD5(password.toCharArray());
+
 			Customer customer = CustomerDAO.login(username, password, conn);
-			if(customer != null) {
+			if (customer != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", customer);
 				session.setAttribute("id", customer.getCustomerID());
@@ -73,19 +75,25 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("fullname", customer.getFullName());
 				session.setAttribute("address", customer.getAddress());
 				session.setAttribute("phone", customer.getPhone());
-				
-				session.setMaxInactiveInterval(10*60);
-				
+
+				session.setMaxInactiveInterval(30 * 60);
+
 				Cookie loginCookie = new Cookie("username", username);
-				loginCookie.setMaxAge(10*60); 	// 10 phut
+				loginCookie.setMaxAge(30 * 60); // 30 phut
 				response.addCookie(loginCookie);
-				response.sendRedirect("views/frontend/Home.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Home.jsp");
+				dispatch.forward(request, response);
 			} else {
 				request.setAttribute("message", "Tài khoản không tồn tại");
 				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
 				dispatch.forward(request, response);
 			}
+
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+
 	}
 
 }

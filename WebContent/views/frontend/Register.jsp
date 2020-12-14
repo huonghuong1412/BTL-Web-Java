@@ -34,27 +34,34 @@
 						<form action="<%=request.getContextPath()%>/RegisterServlet"
 							method="post" onsubmit="return(checkRegister());">
 							<div class="form-control">
-								<label>User name: </label> <input type="text" id="username" required="" name="username" placeholder="Tên tài khoản">
+								<label>User name: </label> <input type="text" id="username"
+									required="" name="username" placeholder="Tên tài khoản">
 							</div>
 							<div class="form-control">
-								<label>Password: </label> <input type="password" id="password" required="" name="password" placeholder="Mật khẩu">
+								<label>Password: </label> <input type="password" id="password"
+									required="" name="password" placeholder="Mật khẩu">
 							</div>
 							<div class="form-control">
-								<label>Confirm: </label> <input type="password" id="passwordConfirm" required="" name="passwordConfirm" placeholder="Mật khẩu">
+								<label>Confirm: </label> <input type="password"
+									id="passwordConfirm" required="" name="passwordConfirm"
+									placeholder="Mật khẩu">
 							</div>
 							<div class="form-control">
-								<label>Name: </label> <input type="text" name="fullname" id="fullname" required="" placeholder="Họ và tên">
+								<label>Name: </label> <input type="text" name="fullname"
+									id="fullname" required="" placeholder="Họ và tên">
 							</div>
 							<div class="form-control">
-								<label>Address: </label> <input type="text" name="address" id="address" required="" placeholder="Địa chỉ">
+								<label>Address: </label> <input type="text" name="address"
+									id="address" required="" placeholder="Địa chỉ">
 							</div>
 							<div class="form-control">
-								<label>Phone: </label> <input type="text" name="phone" id="phone" required="" placeholder="Số điện thoại">
+								<label>Phone: </label> <input type="text" name="phone"
+									id="phone" required="" placeholder="Số điện thoại">
 							</div>
 							<div class="form-control">
-						<button type="submit" class="signup-btn" onclick="checkRegister()">
-							Đăng nhập</button>
-					</div>
+								<button type="submit" class="signup-btn"
+									onclick="checkRegister()">Đăng ký</button>
+							</div>
 						</form>
 					</div>
 				</div>

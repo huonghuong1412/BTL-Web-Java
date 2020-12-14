@@ -245,3 +245,35 @@ tr.product {
     line-height: 45px;
     font-size: 1.6rem;
 }
+
+.order-title {
+	font-size: 1.8rem;
+}
+
+.display-3 {
+	font-size: 2rem;
+	margin-bottom: 10px;
+}
+
+.lead {
+	font-size: 1.4rem;
+}
+
+.jumbotron {
+	margin-bottom: 15px;
+}
+
+.lead strong {
+	font-size: 1.4rem;
+}
+
+.back-btn {
+    padding: 16px 30px;
+    border: none;
+    background-color: var(--red-color);
+    color: #fff;
+    cursor: pointer;
+    text-transform: capitalize;
+    display: inline-block;
+    font-size: 1.4rem;
+}

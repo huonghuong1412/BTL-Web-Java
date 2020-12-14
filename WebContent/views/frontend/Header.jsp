@@ -105,10 +105,6 @@
 					</ul> <span class="navbar__main--link-right"> <i
 						class="fas fa-angle-right"></i>
 				</span></li>
-				<li><a class="navbar__main--link"
-					href="<%=request.getContextPath()%>/ContactServlet"> <span>Liên
-							hệ</span>
-				</a></li>
 			</ul>
 			<div class="navbar__main--phone">
 				<span class="navbar__main--phone-icon"> <i

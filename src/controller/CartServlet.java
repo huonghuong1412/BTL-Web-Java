@@ -51,7 +51,6 @@ public class CartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String command = request.getParameter("command");
 		String ProductID = request.getParameter("ProductID");
-		System.out.print(ProductID);
 		int productID = 1;
 //		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		int quantity = 1;

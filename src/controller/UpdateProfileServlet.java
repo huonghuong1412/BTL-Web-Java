@@ -33,8 +33,15 @@ public class UpdateProfileServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/UpdateProfile.jsp");
-		rd.forward(request, response);
+		
+		HttpSession session = request.getSession();
+		if(session.getAttribute("user") != null) {
+			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/UpdateProfile.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**

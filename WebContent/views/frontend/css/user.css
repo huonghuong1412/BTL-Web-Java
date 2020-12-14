@@ -130,4 +130,58 @@
     text-transform: capitalize;
 }
 
+.back-btn {
+    padding: 16px 30px;
+    border: none;
+    background-color: var(--red-color);
+    color: #fff;
+    cursor: pointer;
+    text-transform: capitalize;
+    display: inline-block;
+    font-size: 1.4rem;
+    margin-top: 20px;
+}
+
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    font-size: 1.4rem;
+    max-height: 360px;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    background-color: transparent;
+    color: #212529;
+}
+
+table.table thead th {
+    border-top: none;
+    text-align: center;
+}
+table.table td, table.table th {
+    text-align: center;
+}
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+    font-weight: 400;
+}
+
+
+
+
+
+
+
+
 

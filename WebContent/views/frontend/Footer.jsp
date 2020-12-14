@@ -33,8 +33,8 @@
 					<div class="footer__content">
 						<h3 class="footer__title">Liên kết</h3>
 						<ul class="footer__link--list">
-							<li><a class="footer__link--item" href="/">Trang chủ</a></li>
-							<li><a class="footer__link--item" href="/">Tất cả sản
+							<li><a class="footer__link--item" href="<%=request.getContextPath()%>/IndexServlet">Trang chủ</a></li>
+							<li><a class="footer__link--item" href="<%=request.getContextPath()%>/ListProductServlet?category=all">Tất cả sản
 									phẩm</a></li>
 							<li><a class="footer__link--item" href="/">Hướng dẫn</a></li>
 							<li><a class="footer__link--item" href="/">Tìm kiếm</a></li>
@@ -77,7 +77,7 @@
 					<div class="footer__content">
 						<h3 class="footer__title">Kết nối với chúng tôi</h3>
 						<div class="footer__iframe">
-							<img src="./img/logo.jpg" alt="">
+							<img src="views/frontend/img/logo.jpg" alt="">
 						</div>
 					</div>
 				</div>

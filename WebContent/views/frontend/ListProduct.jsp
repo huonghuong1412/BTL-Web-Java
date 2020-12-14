@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
 <link rel="stylesheet" href="views/frontend/css/common.css">
+<link rel="stylesheet" href="views/frontend/css/animation.css">
 <link rel="stylesheet" href="views/frontend/css/home.css">
 <link rel="stylesheet" href="views/frontend/css/products.css">
 <link rel="stylesheet" href="views/frontend/css/responsive.css">
@@ -41,29 +42,8 @@
 									class="fa fa-caret-down"></i>
 								</span>
 							</h3>
-							<ul class="sidebar__inner--menu">
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=all">Tất
-										cả sản phẩm</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Áo khoác">Áo
-										khoác</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Áo">Áo</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Quần">Quần</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Váy đầm">Váy
-										đầm</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Bộ mặc nhà">Bộ
-										mặc nhà</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Giày">Giày</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=Túi xách">Túi
-										xách</a></li>
-							</ul>
+							<%@include file="Category.jsp"%>
+							
 						</div>
 					</div>
 				</div>

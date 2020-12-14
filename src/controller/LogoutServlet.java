@@ -1,6 +1,8 @@
 package controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,9 @@ public class LogoutServlet extends HttpServlet {
 		session.removeAttribute("fullname");
 		session.removeAttribute("address");
 		session.removeAttribute("phone");
-		response.sendRedirect("views/frontend/Home.jsp");
+		session.removeAttribute("cart");
+		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Home.jsp");
+		rd.forward(request, response);
 	}
 
 	/**

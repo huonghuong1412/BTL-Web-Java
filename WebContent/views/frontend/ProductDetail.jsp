@@ -39,29 +39,7 @@
 									class="fa fa-caret-down"></i>
 								</span>
 							</h3>
-							<ul class="sidebar__inner--menu">
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=all">Tất
-										cả sản phẩm</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=ao-khoac">Áo
-										khoác</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=ao">Áo</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=quan">Quần</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=vay-dam">Váy
-										đầm</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=bo-mac-nha">Bộ
-										mặc nhà</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=giay">Giày</a></li>
-								<li><a class="sidebar__inner--link"
-									href="<%=request.getContextPath()%>/ListProductServlet?category=tui-xach">Túi
-										xách</a></li>
-							</ul>
+							<%@include file="Category.jsp"%>
 						</div>
 					</div>
 				</div>

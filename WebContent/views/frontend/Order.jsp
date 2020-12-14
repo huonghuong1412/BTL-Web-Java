@@ -177,8 +177,7 @@
 							
 							<div class="checkout__btn">
 								<button type="submit"
-									class="checkout__voucher--btn"
-									onclick="alert('Đặt hàng thành công')">ĐẶT HÀNG</button>
+									class="checkout__voucher--btn">ĐẶT HÀNG</button>
 							</div>
 					</form>
 				</div>

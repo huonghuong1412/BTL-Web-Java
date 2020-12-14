@@ -45,8 +45,7 @@ public class OrderServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
 			rd.forward(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");
-			rd.forward(request, response);
+			response.sendRedirect("views/frontend/Login.jsp");
 		}
 	}
 
@@ -78,13 +77,18 @@ public class OrderServlet extends HttpServlet {
 							productDAO.getProductByIdCart(c.getProduct().getProductID()).getProductID(),
 							productDAO.getProductByIdCart(c.getProduct().getProductID()).getPrice(), c.getQuantity(), 0,
 							new Timestamp(new Date().getTime()), note, phone, address);
-					OrderDAO.addOrder(order);
-
+					boolean rs = OrderDAO.addOrder(order);
+					if(rs) {
+						RequestDispatcher rd = request.getRequestDispatcher("views/frontend/OrderSuccess.jsp");
+						rd.forward(request, response);
+					} else {
+						RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
+						rd.forward(request, response);
+					}
 				}
 			}
 
-			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
-			rd.forward(request, response);
+			
 
 		} catch (Exception e) {
 			// TODO: handle exception
