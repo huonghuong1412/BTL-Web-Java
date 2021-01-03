@@ -36,7 +36,7 @@ public class DetailOrderCustomer extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if(session.getAttribute("user") != null) {
+		if(session.getAttribute("admin") != null) {
 			doPost(request, response);
 		} else {
 //			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");

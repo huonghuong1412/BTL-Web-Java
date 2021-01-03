@@ -65,10 +65,10 @@ public class AdminLoginServlet extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("admin", "dmin avdvsdvsd");
 				
-				session.setMaxInactiveInterval(30*60);
+				session.setMaxInactiveInterval(1*60);
 				
 				Cookie loginCookie = new Cookie("username", username);
-				loginCookie.setMaxAge(30 * 60); // 30 phut
+				loginCookie.setMaxAge(1 * 60); // 30 phut
 				response.addCookie(loginCookie);
 				
 //				RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");

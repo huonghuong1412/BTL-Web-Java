@@ -82,11 +82,11 @@ public class LoginServlet extends HttpServlet {
 				//
 				// session.setAttribute("timeOutTimeInSeconds", 300);
 				// session.setAttribute("showTimerTimeInSeconds", 30);
-				session.setMaxInactiveInterval(30 * 60);
+				session.setMaxInactiveInterval(1 * 60);
 
 				//
 				Cookie loginCookie = new Cookie("username", username);
-				loginCookie.setMaxAge(30 * 60); // 30 phut
+				loginCookie.setMaxAge(1 * 60); // 30 phut
 				response.addCookie(loginCookie);
 
 				response.sendRedirect(request.getContextPath() + "/home");

@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="views/frontend/img/favicon.png"
+	type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -35,18 +36,28 @@
 							<input type="hidden" name="id"
 								value="<%=session.getAttribute("id")%>">
 							<div class="form-control">
-								<label>Mật khẩu mới: </label> <input type="password" name="newPass"
-									id="newPass">
+								<label>Mật khẩu cũ: </label> <input type="password"
+									name="oldPass" id="oldPass" placeholder="Mật khẩu cũ">
+								<p class="form-message"></p>
+							</div>
+							<div class="form-control">
+								<label>Mật khẩu mới: </label> <input type="password"
+									name="newPass" id="newPass" placeholder="Mật khẩu mới">
 								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<label>Nhập lại mật khẩu: </label> <input type="password"
-									name="newPassConfirm" id="newPassConfirm">
+									name="newPassConfirm" id="newPassConfirm" placeholder="Xác nhận mật khẩu">
 								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<p class="form-message-error"></p>
 							</div>
+							<c:if test="${message != null}">
+								<div class="form-control">
+									<p class="form-message-error">Mật khẩu cũ không chính xác</p>
+								</div>
+							</c:if>
 							<div>
 								<input type="submit" value="Cập nhật" class="signup-btn"
 									onclick="checkUpdate()"> <a

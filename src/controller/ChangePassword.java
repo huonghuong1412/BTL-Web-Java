@@ -56,26 +56,31 @@ public class ChangePassword extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
+		HttpSession session = request.getSession();
+		String oldPass = request.getParameter("oldPass");
 		String newPassword = request.getParameter("newPass");
 		Connection conn = ConnectDB.getConnection();
 		try {
-			newPassword = HashPassword.hashPassword(newPassword);
-			if (CustomerDAO.changePassword(id, newPassword, conn)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("id", id);
-				// RequestDispatcher rd =
-				// request.getRequestDispatcher("views/frontend/Profile.jsp");
-				// rd.forward(request, response);
-				response.sendRedirect(request.getContextPath() + "/profile");
+			oldPass = HashPassword.hashPassword(oldPass);
+			if (oldPass.equals(session.getAttribute("password")) == true) {
+				newPassword = HashPassword.hashPassword(newPassword);
+				if (CustomerDAO.changePassword(id, newPassword, conn)) {
+
+					session.setAttribute("id", id);
+					response.sendRedirect(request.getContextPath() + "/profile");
+				} else {
+					RequestDispatcher rd = request.getRequestDispatcher("views/frontend/ChangePassword.jsp");
+					rd.forward(request, response);
+				}
 			} else {
+				request.setAttribute("message", "not ok");
 				RequestDispatcher rd = request.getRequestDispatcher("views/frontend/ChangePassword.jsp");
 				rd.forward(request, response);
 			}
-		} catch (NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-
 	}
 
 }
