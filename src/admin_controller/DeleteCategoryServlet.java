@@ -36,10 +36,14 @@ public class DeleteCategoryServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("admin") != null) {
-			response.sendRedirect("views/admin/Products.jsp");
+//			response.sendRedirect("views/admin/Products.jsp");
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Category.jsp");
+//			rd.forward(request, response);
+			doPost(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/adminlogin");
 		}
 	}
 
@@ -51,8 +55,9 @@ public class DeleteCategoryServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("CategoryID"));
 		boolean status = CategoryDAO.deleteCategory(id, conn);
 		if(status) {
-			RequestDispatcher rd=request.getRequestDispatcher("/AdminCategoryServlet");
-			rd.forward(request, response);
+//			RequestDispatcher rd=request.getRequestDispatcher(request.getContextPath() + "/admincategory");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/admincategory");
 		} else {
 			
 		}

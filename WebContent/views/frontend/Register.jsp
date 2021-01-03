@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -31,32 +32,46 @@
 			<div class="container">
 				<div class="user__page--inner">
 					<div class="form">
-						<form action="<%=request.getContextPath()%>/RegisterServlet"
-							method="post" onsubmit="return(checkRegister());">
+						<form action="<%=request.getContextPath()%>/register"
+							method="post" onsubmit="return(checkRegister());" id="form-1">
 							<div class="form-control">
 								<label>User name: </label> <input type="text" id="username"
-									required="" name="username" placeholder="Tên tài khoản">
+									name="username" placeholder="Tên tài khoản">
+								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<label>Password: </label> <input type="password" id="password"
-									required="" name="password" placeholder="Mật khẩu">
+									name="password" placeholder="Mật khẩu">
+								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<label>Confirm: </label> <input type="password"
-									id="passwordConfirm" required="" name="passwordConfirm"
+									id="passwordConfirm" name="passwordConfirm"
 									placeholder="Mật khẩu">
+								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<label>Name: </label> <input type="text" name="fullname"
-									id="fullname" required="" placeholder="Họ và tên">
+									id="fullname" placeholder="Họ và tên">
+								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<label>Address: </label> <input type="text" name="address"
-									id="address" required="" placeholder="Địa chỉ">
+									id="address" placeholder="Địa chỉ">
+								<p class="form-message"></p>
 							</div>
 							<div class="form-control">
 								<label>Phone: </label> <input type="text" name="phone"
-									id="phone" required="" placeholder="Số điện thoại">
+									id="phone" placeholder="Số điện thoại">
+								<p class="form-message"></p>
+							</div>
+							<c:if test="${message != null}">
+								<div class="form-control">
+									<p class="form-message-error">Đăng ký thất bại. Tài khoản đã được đăng ký.</p>
+								</div>
+							</c:if>
+							<div class="form-control">
+								<p class="form-message-error"></p>
 							</div>
 							<div class="form-control">
 								<button type="submit" class="signup-btn"
@@ -73,6 +88,6 @@
 
 	<script src="views/frontend/js/jquery-3.5.1.min.js"></script>
 	<script src="views/frontend/js/all.min.js"></script>
-	<script src="views/frontend/js/main.js"></script>
+	<script src="views/frontend/js/check.js"></script>
 </body>
 </html>

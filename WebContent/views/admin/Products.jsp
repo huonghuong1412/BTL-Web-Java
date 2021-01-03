@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/admin/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -79,7 +80,7 @@
 									<td>${product.material}</td>
 									<td>${product.quantity}</td>
 									<td>
-									<a class="btn-edit" href="<%=request.getContextPath()%>/UpdateProductServlet?id=${product.productID}">Edit</a> 
+									<a class="btn-edit" href="<%=request.getContextPath()%>/UpdateProductController?id=${product.productID}">Edit</a> 
 									<a class="btn-delete" href="<%=request.getContextPath()%>/DeleteProductServlet?id=${product.productID}">Delete</a></td>
 								</tr>
 							</c:forEach>

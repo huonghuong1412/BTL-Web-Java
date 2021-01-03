@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/all.min.css">
 <link rel="stylesheet" href="css/grid.css">
@@ -43,7 +44,7 @@
 								</div>
 								<div class="form-group">
 									<label for="add-productFormName" class="">Giá sản phẩm</label>
-									<input required="" type="text" class="form-control input-lg"
+									<input required="" type="number" class="form-control input-lg"
 										name="Price" placeholder="Giá sản phẩm">
 								</div>
 								<div class="form-group">
@@ -81,7 +82,7 @@
 								</div>
 								<div class="form-group">
 									<button class="btn-view" type="submit">Thêm sản phẩm</button>
-									<a class="btn-delete" href="./products.html">Huỷ</a>
+									<a class="btn-delete" href="<%=request.getContextPath()%>/AdminProductServlet">Huỷ</a>
 								</div>
 							</div>
 						</div>
@@ -90,6 +91,6 @@
 			</div>
 		</div>
 	</div>
-
+	<script src="views/admin/js/check.js"></script>
 </body>
 </html>

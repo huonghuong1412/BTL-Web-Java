@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class IndexAdminServlet
  */
-@WebServlet("/IndexAdminServlet")
+@WebServlet(name = "/IndexAdminServlet", urlPatterns= {"/adminhome"})
 public class IndexAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,9 +35,11 @@ public class IndexAdminServlet extends HttpServlet {
 		if(session.getAttribute("admin") != null) {
 			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
 			dispatch.forward(request, response);
+//			response.sendRedirect(request.getContextPath() + "/adminhome");
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/adminlogin");
 		}
 		
 	}

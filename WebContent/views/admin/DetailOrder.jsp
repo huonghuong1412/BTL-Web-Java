@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/admin/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -37,12 +38,12 @@
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th style="width: 100px;">Tên khách hàng</th>
-								<th style="width: 100px;">Tên sản phẩm</th>
+								<th style="width: 150px;">Tên khách hàng</th>
+								<th style="width: 200px;">Tên sản phẩm</th>
 								<th style="width: 100px;">Số lượng</th>
-								<th style="width: 200px;">Tổng tiền</th>
-								<th style="width: 200px;">Trạng thái</th>
-								<th style="width: 200px;">Số điện thoại</th>
+								<th style="width: 100px;">Tổng tiền</th>
+								<th style="width: 180px;">Trạng thái</th>
+								<th style="width: 100px;">Số điện thoại</th>
 								<th>Địa chỉ nhận hàng</th>
 								<th>Xác nhận</th>
 							</tr>
@@ -60,12 +61,15 @@
 								<td><c:choose>
 										<c:when test="${order.status == 0}">Chưa xác nhận</c:when>
 										<c:when test="${order.status == 1}">Đã xác nhận</c:when>
+										<c:when test="${order.status == 2}">Đã huỷ đơn</c:when>
 									</c:choose></td>
 								<td>${order.phone }</td>
 								<td>${order.address }</td>
 								<td><a class="btn-delete"
 									href="<%=request.getContextPath()%>/ConfirmOrderServlet?OrderID=${order.orderID}">Xác
 										nhận</a>
+										<a class="btn-delete"
+									href="<%=request.getContextPath()%>/CancelOrderServlet?OrderID=${order.orderID}">Huỷ đơn</a>
 								<a class="btn-delete"
 									href="<%=request.getContextPath()%>/AdminOrderServlet">Quay lại</a>	
 								</td>

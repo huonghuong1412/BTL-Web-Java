@@ -6,6 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/admin/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -37,12 +38,12 @@
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
-								<th>STT</th>
-								<th style="width: 100px;">Mã khách hàng</th>
+								<th style="width: 50px;">STT</th>
+								<th style="width: 150px;">Mã khách hàng</th>
 								<th style="width: 100px;">Mã sản phẩm</th>
 								<th style="width: 100px;">Số lượng</th>
-								<th style="width: 200px;">Tổng tiền</th>
-								<th style="width: 200px;">Trạng thái</th>
+								<th style="width: 150px;">Tổng tiền</th>
+								<th style="width: 150px;">Trạng thái</th>
 								<th style="width: 200px;">Ngày mua</th>
 								<th>Hành động</th>
 							</tr>
@@ -73,14 +74,16 @@
 										<c:choose>
 											<c:when test="${order.status == 0}">Chưa xác nhận</c:when>
 											<c:when test="${order.status == 1}">Đã xác nhận</c:when>
+											<c:when test="${order.status == 2}">Đã huỷ đơn</c:when>
 										</c:choose>
 									</td>
 									<td>
 										${order.dateBuy }
 									</td>
-									<td>
-									<a class="btn-edit" href="<%=request.getContextPath()%>/AdminDetailOrderServlet?OrderID=${order.orderID}">Xem chi tiết</a> 
+									<td style="display: flex; align-items: center; justify-content: space-between">
+									<a class="btn-edit" href="<%=request.getContextPath()%>/AdminDetailOrderServlet?OrderID=${order.orderID}">Xem</a> 
 									<a class="btn-delete" href="<%=request.getContextPath()%>/ConfirmOrderServlet?OrderID=${order.orderID}">Xác nhận</a>
+									<a class="btn-delete" href="<%=request.getContextPath()%>/CancelOrderServlet?OrderID=${order.orderID}">Huỷ đơn</a>
 									</td>
 								</tr>
 							</c:forEach>
@@ -94,13 +97,13 @@
 							<c:when test="${count%6==0}">
 								<c:forEach var="i" begin="1" end="${count/6}">
 									<li class="pagination-btn"><a page="${i}"
-										class="page-link" href="AdminOrderServlet?page=${i}">${i }</a></li>
+										class="page-link" href="listorder?page=${i}">${i }</a></li>
 								</c:forEach>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="i" begin="1" end="${count/6 + 1 }">
 									<li class="pagination-btn"><a page="${i}"
-										class="page-link" href="AdminOrderServlet?page=${i}">${i }</a></li>
+										class="page-link" href="listorder?page=${i}">${i }</a></li>
 								</c:forEach>
 							</c:otherwise>
 						</c:choose>

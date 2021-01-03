@@ -22,7 +22,7 @@ import models.Order;
 /**
  * Servlet implementation class OrderServlet
  */
-@WebServlet("/OrderServlet")
+@WebServlet(name = "/OrderServlet", urlPatterns = {"/order"})
 public class OrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,12 +40,20 @@ public class OrderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String username = request.getParameter("username");
-		if (username != null) {
+//		String username = request.getParameter("username");
+//		if (username != null) {
+//			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
+//			rd.forward(request, response);
+//		} else {
+//			response.sendRedirect(request.getContextPath() + "login");
+//		}
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") != null) {
 			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
 			rd.forward(request, response);
-		} else {
-			response.sendRedirect("views/frontend/Login.jsp");
+		} 
+		else {
+			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
 
@@ -70,7 +78,15 @@ public class OrderServlet extends HttpServlet {
 			if (session.getAttribute("cart") != null) {
 				cart = (ArrayList<Cart>) session.getAttribute("cart");
 			}
-
+			
+			System.out.print(cart.size() + "AAAAAAAA");
+			
+			if(cart.size() == 0) {
+//				RequestDispatcher rd = request.getRequestDispatcher("/ListProductServlet");
+//				rd.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/ListProductServlet?category=all");
+			}
+			
 			if (cart != null) {
 				for (Cart c : cart) {
 					Order order = new Order(0, customerID,
@@ -82,13 +98,12 @@ public class OrderServlet extends HttpServlet {
 						RequestDispatcher rd = request.getRequestDispatcher("views/frontend/OrderSuccess.jsp");
 						rd.forward(request, response);
 					} else {
-						RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
-						rd.forward(request, response);
+//						RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Order.jsp");
+//						rd.forward(request, response);
+						response.sendRedirect(request.getContextPath() + "/order");
 					}
 				}
 			}
-
-			
 
 		} catch (Exception e) {
 			// TODO: handle exception

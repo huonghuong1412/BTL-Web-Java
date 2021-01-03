@@ -11,7 +11,7 @@
 			<i class="fa fa-bars"></i>
 		</div>
 		<div class="header__logo">
-			<a href="<%=request.getContextPath()%>/IndexServlet"> <img
+			<a href="<%=request.getContextPath()%>/home"> <img
 				class="header__logo-img" src="img/logo.jpg" alt=""> <img
 				class="header__logo-img" src="views/frontend/img/logo.jpg" alt="">
 			</a>
@@ -30,16 +30,16 @@
 					<c:when test="${sessionScope.user != null}">
 						<ul class="header__aside--info-top">
 							<li><a class="header__aside--info-link"
-								href="<%=request.getContextPath()%>/ProfileServlet">Thông
+								href="<%=request.getContextPath()%>/profile">Thông
 									tin tài khoản</a></li>
 						</ul>
 					</c:when>
 					<c:otherwise>
 						<ul class="header__aside--info-top">
 							<li><a class="header__aside--info-link"
-								href="<%=request.getContextPath()%>/RegisterServlet">Đăng ký</a></li>
+								href="<%=request.getContextPath()%>/register">Đăng ký</a></li>
 							<li><a class="header__aside--info-link"
-								href="<%=request.getContextPath()%>/LoginServlet">Đăng nhập</a></li>
+								href="<%=request.getContextPath()%>/login">Đăng nhập</a></li>
 						</ul>
 					</c:otherwise>
 				</c:choose>
@@ -74,7 +74,7 @@
 		<div class="navbar__main">
 			<ul class="navbar__main--menu">
 				<li><a class="navbar__main--link active"
-					href="<%=request.getContextPath()%>/IndexServlet"> <span>Trang
+					href="<%=request.getContextPath()%>/home"> <span>Trang
 							chủ</span>
 				</a></li>
 				<li class="hasDropdown"><a class="navbar__main--link"
@@ -105,6 +105,9 @@
 					</ul> <span class="navbar__main--link-right"> <i
 						class="fas fa-angle-right"></i>
 				</span></li>
+				<li><a class="navbar__main--link"
+					href="<%=request.getContextPath()%>/ContactServlet"> <span>Phản hồi</span>
+				</a></li>
 			</ul>
 			<div class="navbar__main--phone">
 				<span class="navbar__main--phone-icon"> <i

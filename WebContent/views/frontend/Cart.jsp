@@ -10,6 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="css/reset.css">
 <link rel="stylesheet" href="css/all.min.css">
 <link rel="stylesheet" href="css/grid.css">
@@ -104,9 +105,9 @@
 										<div class="detail-product-quantity">
 											<div class="detail-product-action">
 												<a class="detail-product-quantity-btn"
-													href="<%=request.getContextPath()%>/CartServlet?command=deleteCart&ProductID=<%=c.getProduct().getProductID()%>">-</a>
+													href="<%=request.getContextPath()%>/CartServlet?command=deleteCart&ProductID=<%=c.getProduct().getProductID()%>&quantity=1">-</a>
 												<span class="qty"><%=c.getQuantity()%></span> <a
-													href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=<%=c.getProduct().getProductID()%>"
+													href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=<%=c.getProduct().getProductID()%>&quantity=1"
 													class="detail-product-quantity-btn">+</a>
 											</div>
 										</div>
@@ -115,7 +116,7 @@
 											value="<%=productDAO.getProductByIdCart(c.getProduct().getProductID()).getPrice() * c.getQuantity()%>"
 											type="currency" /></th>
 									<th><a class="close-btn"
-										href="<%=request.getContextPath()%>/CartServlet?command=removeCart&ProductID=<%=c.getProduct().getProductID()%>">
+										href="<%=request.getContextPath()%>/CartServlet?command=removeCart&ProductID=<%=c.getProduct().getProductID()%>&quantity=<%=c.getQuantity()%>">
 											<i class="fa fa-times"></i>
 									</a></th>
 								</tr>
@@ -146,7 +147,7 @@
 							href="<%=request.getContextPath()%>/ListProductServlet?category=all">
 							<i class="fas fa-caret-left"></i>Tiếp tục mua hàng
 						</a> <a class="cart__action--btn"
-							href="<%=request.getContextPath()%>/OrderServlet?username=<%=username%>">Đặt hàng<i
+							href="<%=request.getContextPath()%>/order">Đặt hàng<i
 							class="fas fa-caret-right"></i>
 						</a>
 					</div>

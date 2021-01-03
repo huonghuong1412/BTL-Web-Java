@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -143,7 +144,7 @@
 				<div class="col-lg-4 col-md-12 col-sm-12">
 					<h1 class="checkout__info--title">Thông tin mua và nhận
 						hàng</h1>
-					<form class="contact-form-group" action="<%=request.getContextPath()%>/OrderServlet?username=<%=username%>&total=<%=total%>" method="post">
+					<form class="contact-form-group" action="<%=request.getContextPath()%>/order?username=<%=username%>&total=<%=total%>" method="post">
 						<input 
 							type="text" 
 							placeholder="Họ và tên" 

@@ -17,6 +17,14 @@ public class Contact {
 		Content = content;
 	}
 
+	
+	public Contact(int customerID, String email, String content) {
+		super();
+		CustomerID = customerID;
+		Email = email;
+		Content = content;
+	}
+
 	public int getContactID() {
 		return ContactID;
 	}

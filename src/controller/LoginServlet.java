@@ -21,7 +21,7 @@ import models.Customer;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet("/LoginServlet")
+@WebServlet(name = "LoginServlet", urlPatterns = { "/login" })
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,10 +41,12 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (session.getAttribute("user") != null) {
-			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Home.jsp");
-			dispatch.forward(request, response);
+			// RequestDispatcher dispatch =
+			// request.getRequestDispatcher("/views/frontend/Home.jsp");
+			// dispatch.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/home");
 		} else {
-			RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("/views/frontend/Login.jsp");
 			dispatch.forward(request, response);
 		}
 
@@ -63,7 +65,7 @@ public class LoginServlet extends HttpServlet {
 		Connection conn = ConnectDB.getConnection();
 
 		try {
-			password = HashPassword.hashMD5(password.toCharArray());
+			password = HashPassword.hashPassword(password);
 
 			Customer customer = CustomerDAO.login(username, password, conn);
 			if (customer != null) {
@@ -76,16 +78,21 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("address", customer.getAddress());
 				session.setAttribute("phone", customer.getPhone());
 
+				// session.setMaxInactiveInterval(300);
+				//
+				// session.setAttribute("timeOutTimeInSeconds", 300);
+				// session.setAttribute("showTimerTimeInSeconds", 30);
 				session.setMaxInactiveInterval(30 * 60);
 
+				//
 				Cookie loginCookie = new Cookie("username", username);
 				loginCookie.setMaxAge(30 * 60); // 30 phut
 				response.addCookie(loginCookie);
-				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Home.jsp");
-				dispatch.forward(request, response);
+
+				response.sendRedirect(request.getContextPath() + "/home");
 			} else {
 				request.setAttribute("message", "Tài khoản không tồn tại");
-				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("/views/frontend/Login.jsp");
 				dispatch.forward(request, response);
 			}
 

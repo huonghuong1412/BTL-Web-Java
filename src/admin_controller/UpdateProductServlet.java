@@ -50,45 +50,47 @@ public class UpdateProductServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
 		int id = Integer.parseInt(request.getParameter("id"));
-		Product product = ProductDAO.getProductById(id);
-		request.setAttribute("product", product);
-		RequestDispatcher rd1 = request.getRequestDispatcher("views/admin/UpdateProduct.jsp");
-		rd1.forward(request, response);
+		Product product1 = ProductDAO.getProductById(id);
 
 		String productName = request.getParameter("ProductName");
 		String price = request.getParameter("Price");
 		String quantity = request.getParameter("Quantity");
-		Part image = request.getPart("Image");
+//		Part image = request.getPart("Image");
+		String image = request.getParameter("Image");
+		System.out.print(image);
 		String description = request.getParameter("Description");
 		String material = request.getParameter("Material");
 		String category = request.getParameter("CategoryID");
 		
-		try {
-			Product product1 = new Product();
+		System.out.println("check3 "+ image);
+		System.out.println("name:"+productName +" category: " + category +"id: "+id );
+		
+//		try {
+			
+			
 			product1.setProductName(productName);
 			product1.setPrice(Double.parseDouble(price));
 			product1.setQuantity(Integer.parseInt(quantity));
-			// product.setImage(image);
+			product1.setImage(image);
 			product1.setDescription(description);
 			product1.setMaterial(material);
 			product1.setCategoryID(Integer.parseInt(category));
-			product1.setImage(image.getSubmittedFileName().toString());
-			
-			System.out.print(category);
-			
-			boolean status = ProductDAO.updateProduct(product);
+//			
+//			product1.setImage(image.getSubmittedFileName().toString());
+//			
+//			System.out.print(category);
+////			
+			boolean status = ProductDAO.updateProduct(product1);
+			System.out.println("status" + status);
 			if(status) {
-				RequestDispatcher rd = request.getRequestDispatcher("/AdminProductServlet");
+				RequestDispatcher rd = request.getRequestDispatcher("/UpdateProductController?msg=updated");
 				rd.forward(request, response);
 			} else {
-				RequestDispatcher rd = request.getRequestDispatcher("/UpdateProductServlet");
+				RequestDispatcher rd = request.getRequestDispatcher("UpdateProductController?msg=noupdate");
 				rd.forward(request, response);
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
+		
 	}
 
 }

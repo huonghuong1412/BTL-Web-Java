@@ -74,8 +74,7 @@ public class ProductDAO {
 			sql = "select * from product limit 12 offset " + (page - 1) * 12;
 		} else if (category.contentEquals("allproduct")) {
 			sql = "select * from product limit 6 offset " + (page - 1) * 6;
-		}
-		else {
+		} else {
 			sql = "select product.*\r\n" + "from product,category\r\n" + "where category.CategoryName='" + category
 					+ "'\r\n" + "and product.CategoryID=category.CategoryID limit 12 offset " + (page - 1) * 12;
 		}
@@ -122,7 +121,8 @@ public class ProductDAO {
 				String image = rs.getString("Image");
 				String material = rs.getString("Material");
 				int categoryID = rs.getInt("CategoryID");
-				list.add(new Product(productID, productName, price, quantity, image, description, material, categoryID));
+				list.add(
+						new Product(productID, productName, price, quantity, image, description, material, categoryID));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -135,7 +135,7 @@ public class ProductDAO {
 	public static List<Product> getAllProduct(Connection conn, int page) {
 		List<Product> list = new ArrayList<Product>();
 		PreparedStatement state = null;
-		String sql = "select * from product limit 5 offset " + (page-1)*5;
+		String sql = "select * from product limit 5 offset " + (page - 1) * 5;
 		try {
 			state = conn.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -220,29 +220,29 @@ public class ProductDAO {
 
 		try {
 			preparedStatement = conn.prepareStatement(sql);
-			 preparedStatement.setString(1, product.getProductName());
-			 preparedStatement.setDouble(2, product.getPrice());
-			 preparedStatement.setInt(3, product.getQuantity());
-			 preparedStatement.setString(4, product.getImage());
-			 preparedStatement.setString(5, product.getDescription());
-			 preparedStatement.setString(6, product.getMaterial());
-			 preparedStatement.setInt(7, product.getCategoryID());
-			 System.out.println(preparedStatement);
-			 preparedStatement.executeUpdate();
-			 return true;
+			preparedStatement.setString(1, product.getProductName());
+			preparedStatement.setDouble(2, product.getPrice());
+			preparedStatement.setInt(3, product.getQuantity());
+			preparedStatement.setString(4, product.getImage());
+			preparedStatement.setString(5, product.getDescription());
+			preparedStatement.setString(6, product.getMaterial());
+			preparedStatement.setInt(7, product.getCategoryID());
+			System.out.println(preparedStatement);
+			preparedStatement.executeUpdate();
+			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			return false;
 		}
 	}
-	
-	public static boolean deleteProduct (int id, Connection conn) {
+
+	public static boolean deleteProduct(int id, Connection conn) {
 		PreparedStatement state = null;
 		String sql = "delete from product where ProductID = " + id;
 		try {
 			state = conn.prepareStatement(sql);
 			int rs = state.executeUpdate();
-			if(rs == 0) {
+			if (rs == 0) {
 				return false;
 			} else {
 				return true;
@@ -251,28 +251,27 @@ public class ProductDAO {
 			// TODO: handle exception
 			return false;
 		}
-		
+
 	}
-	
-	
-	public static boolean updateProduct (Product product) {
+
+	public static boolean updateProduct(Product product) {
 		PreparedStatement state = null;
 		Connection conn = ConnectDB.getConnection();
-		
-		String sql = "UPDATE product SET ProductName=?, Price=?, Quantity=?, `Description`=?, Material=?, CategoryID=? WHERE ProductID=?";
-	
+
+		String sql = "UPDATE product SET ProductName=?, Price=?, Quantity=?, Image=?, `Description`=?, Material=?, CategoryID=? WHERE ProductID=?";
+
 		try {
 			state = conn.prepareStatement(sql);
 			state.setString(1, product.getProductName());
 			state.setDouble(2, product.getPrice());
 			state.setInt(3, product.getQuantity());
-			state.setString(4, product.getDescription());
-			state.setString(5, product.getMaterial());
-			state.setInt(6, product.getCategoryID());
-			state.setInt(7, product.getProductID());
-			System.out.println(state);
+			state.setString(4, product.getImage());
+			state.setString(5, product.getDescription());
+			state.setString(6, product.getMaterial());
+			state.setInt(7, product.getCategoryID());
+			state.setInt(8, product.getProductID());
 			int rs = state.executeUpdate();
-			if(rs ==0) {
+			if (rs == 0) {
 				return false;
 			} else {
 				return true;

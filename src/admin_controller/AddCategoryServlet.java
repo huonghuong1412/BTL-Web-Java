@@ -37,8 +37,9 @@ public class AddCategoryServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("admin") != null) {
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/InsertCategory.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/InsertCategory.jsp");
+//			rd.forward(request, response);
+			doPost(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
 			rd.forward(request, response);
@@ -58,10 +59,12 @@ public class AddCategoryServlet extends HttpServlet {
 		Connection conn = ConnectDB.getConnection();
 		boolean status = CategoryDAO.insertCategory(category, conn);
 		if(status) {
-			RequestDispatcher rd = request.getRequestDispatcher("/AdminCategoryServlet");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("/AdminCategoryServlet");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/admincategory");
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/AddCategoryServlet");
+			request.setAttribute("mesaage", "Not OK");
+			RequestDispatcher rd = request.getRequestDispatcher("views/admin/InsertCategory.jsp");
 			rd.forward(request, response);
 		}
 	}

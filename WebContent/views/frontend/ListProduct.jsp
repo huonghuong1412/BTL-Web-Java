@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -34,7 +35,7 @@
 	<div class="main__content">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 col-sm-12 col-md-9">
+				<div class="col-lg-3 col-sm-12 col-md-12">
 					<div class="sidebar__sticky sticky-top">
 						<div class="sidebar__inner">
 							<h3 class="sidebar__inner--title">
@@ -47,7 +48,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-9 col-md-9 col-sm-12">
+				<div class="col-lg-9 col-md-12 col-sm-12">
 					<div class="row main__content--inner">
 						<div class="main__content-products">
 							<div class="col-lg-12 col-md-12 col-sm-12">

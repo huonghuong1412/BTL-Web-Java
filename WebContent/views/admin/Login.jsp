@@ -5,12 +5,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/admin/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
 <link rel="stylesheet" href="views/frontend/css/common.css">
-
 <link rel="stylesheet" href="views/frontend/css/user.css">
+<link rel="stylesheet" href="views/frontend/css/user.css">
+<link rel="stylesheet" href="views/admin/css/style.css">
+<title>Admin Login</title>
 </head>
 <body>
 
@@ -29,17 +32,24 @@
 	<div class="user__page">
 		<div class="container">
 			<div class="user__page--inner">
-				<form action="<%=request.getContextPath()%>/AdminLoginServlet"
+				<form action="<%=request.getContextPath()%>/adminlogin"
 					class="form-user" name="myForm" method="post"
 					onsubmit="return(checkLogin());">
 					<div class="form-control">
 						<label class="textLabel">Username</label> <input type="text"
 							id="username" required="" name="username" placeholder="Username">
+							<p class="form-message"></p>
 					</div>
 					<div class="form-control">
 						<label class="textLabel">Mật khẩu</label> <input type="password"
 							id="password" required="" name="password" placeholder="Password">
+							<p class="form-message"></p>
 					</div>
+					<c:if test="${message != null}">
+						<div class="form-control">
+							<p class="form-message-error">Đăng nhập thất bại.</p>
+						</div>
+					</c:if>
 					<div class="form-control">
 						<button type="submit" class="signup-btn" onclick="checkLogin()">
 							Đăng nhập</button>
@@ -51,7 +61,7 @@
 	
 	<script src="views/frontend/js/jquery-3.5.1.min.js"></script>
 	<script src="views/frontend/js/all.min.js"></script>
-	<script src="views/frontend/js/main.js"></script>
+	<script src="views/admin/js/check.js"></script>
 	
 </body>
 </html>

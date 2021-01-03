@@ -51,16 +51,27 @@ public class CartServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String command = request.getParameter("command");
 		String ProductID = request.getParameter("ProductID");
+		String quantityCart = request.getParameter("quantity");
 		int productID = 1;
-//		int quantity = Integer.parseInt(request.getParameter("quantity"));
+		// int quantity = Integer.parseInt(request.getParameter("quantity"));
 		int quantity = 1;
 		if (command.equals("addCart")) {
-			Product product = new Product(Integer.parseInt(ProductID), "", 0.0, 0, "", "", "", 0);
-			addTocart(product);
-			HttpSession session = request.getSession();
-			session.setAttribute("cart", cart);
-			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Cart.jsp");
-			rd.forward(request, response);
+			if (quantityCart != null) {
+				Product product = new Product(Integer.parseInt(ProductID), "", 0.0, 0, "", "", "", 0);
+				addTocart(product, Integer.parseInt(quantityCart));
+				HttpSession session = request.getSession();
+				session.setAttribute("cart", cart);
+				RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Cart.jsp");
+				rd.forward(request, response);
+			} else {
+				Product product = new Product(Integer.parseInt(ProductID), "", 0.0, 0, "", "", "", 0);
+				addTocart(product, 1);
+				HttpSession session = request.getSession();
+				session.setAttribute("cart", cart);
+				RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Cart.jsp");
+				rd.forward(request, response);
+			}
+
 		} else if (command.equals("deleteCart")) {
 			Product product = new Product(Integer.parseInt(ProductID), "", 0.0, 0, "", "", "", 0);
 			deleteFromcart(product);
@@ -82,7 +93,7 @@ public class CartServlet extends HttpServlet {
 			session.setAttribute("cart", cart);
 			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Cart.jsp");
 			rd.forward(request, response);
-		} else if(command.equals("viewCart")) {
+		} else if (command.equals("viewCart")) {
 			HttpSession session = request.getSession();
 			session.setAttribute("cart", cart);
 			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Cart.jsp");
@@ -91,35 +102,40 @@ public class CartServlet extends HttpServlet {
 	}
 
 	// add to cart
-	private String addTocart(Product product) {
-		for(Cart item : cart) {
-			if(item.getProduct().getProductID() == product.getProductID()) {
+	private String addTocart(Product product, int quantity) {
+		for (Cart item : cart) {
+			if (item.getProduct().getProductID() == product.getProductID() && item.getQuantity() < product.getQuantity()) {
 				item.setQuantity(item.getQuantity() + 1);
 				return "cart";
 			}
 		}
 		Cart c = new Cart();
 		c.setProduct(product);
-		c.setQuantity(1);
+		c.setQuantity(quantity);
 		cart.add(c);
 		return "cart";
 	}
 
-	
 	// delete 1 product in cart
 	private String deleteFromcart(Product product) {
-		for(Cart item : cart) {
-			if(item.getProduct().getProductID() == product.getProductID() && item.getQuantity() > 1) {
+		for (Cart item : cart) {
+			if (item.getProduct().getProductID() == product.getProductID() && item.getQuantity() > 1) {
 				item.setQuantity(item.getQuantity() - 1);
+				if (item.getQuantity() == 0) {
+					removeFromcart(product);
+				}
 				return "cart";
+			}
+			if (item.getQuantity() == 0) {
+				removeFromcart(product);
 			}
 		}
 		return "cart";
 	}
 
 	private String removeFromcart(Product product) {
-		for(Cart item : cart) {
-			if(item.getProduct().getProductID() == product.getProductID()) {
+		for (Cart item : cart) {
+			if (item.getProduct().getProductID() == product.getProductID()) {
 				cart.remove(item);
 				return "cart";
 			}
@@ -128,8 +144,8 @@ public class CartServlet extends HttpServlet {
 	}
 
 	private String setCart(Product product, int k) {
-		for(Cart item : cart) {
-			if(item.getProduct().getProductID() == product.getProductID()) {
+		for (Cart item : cart) {
+			if (item.getProduct().getProductID() == product.getProductID()) {
 				item.setQuantity(k);
 				return "cart";
 			}

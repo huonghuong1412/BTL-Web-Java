@@ -40,8 +40,9 @@ public class HistoryOrderServlet extends HttpServlet {
 		if(session.getAttribute("user") != null) {
 			doPost(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
 

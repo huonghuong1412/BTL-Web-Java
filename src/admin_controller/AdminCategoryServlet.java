@@ -19,7 +19,7 @@ import models.Category;
 /**
  * Servlet implementation class AdminCategoryServlet
  */
-@WebServlet("/AdminCategoryServlet")
+@WebServlet(name = "/AdminCategoryServlet", urlPatterns = {"/admincategory"})
 public class AdminCategoryServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

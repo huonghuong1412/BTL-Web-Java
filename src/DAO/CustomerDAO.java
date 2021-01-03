@@ -57,18 +57,33 @@ public class CustomerDAO {
 
 	}
 
-	public static boolean updateProfile(int id, String username, String password, String fullname, String address,
-			String phone, Connection con) {
+	public static boolean updateProfile(int id, String username, String fullname, String address, String phone,
+			Connection con) {
 		PreparedStatement state = null;
-		String sqlUpdate = "update customer set UserName=?, Password=?, FullName=?, Address=?, Phone=? where CustomerID=?";
+		String sqlUpdate = "update customer set UserName=?, FullName=?, Address=?, Phone=? where CustomerID=?";
 		try {
 			state = con.prepareStatement(sqlUpdate);
 			state.setString(1, username);
-			state.setString(2, password);
-			state.setString(3, fullname);
-			state.setString(4, address);
-			state.setString(5, phone);
-			state.setInt(6, id);
+			state.setString(2, fullname);
+			state.setString(3, address);
+			state.setString(4, phone);
+			state.setInt(5, id);
+			state.executeUpdate();
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean changePassword(int id, String pass, Connection con) {
+		PreparedStatement state = null;
+		String sql = "update customer set Password=? where CustomerID=?";
+		try {
+			state = con.prepareStatement(sql);
+			state.setString(1, pass);
+			state.setInt(2, id);
 			state.executeUpdate();
 			return true;
 		} catch (Exception e) {

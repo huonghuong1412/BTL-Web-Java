@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -45,6 +46,7 @@
 									<th style="border: 1px solid rgb(0, 0, 0);">Đơn giá</th>
 									<th style="border: 1px solid rgb(0, 0, 0);">Thành tiền</th>
 									<th style="border: 1px solid rgb(0, 0, 0);">Ngày mua</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">Trạng thái</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -68,6 +70,14 @@
 									<th style="border: 1px solid rgb(0, 0, 0);">
 										${history.dateBuy}
 									</th>
+									<th style="border: 1px solid rgb(0, 0, 0);">
+										
+										<c:choose>
+											<c:when test="${history.status == 0}">Chưa giao hàng</c:when>
+											<c:when test="${history.status == 1}">Đã nhận hàng</c:when>
+											<c:when test="${history.status == 2}">Đã huỷ đơn</c:when>
+										</c:choose>
+									</th>
 								</tr>
 							</c:forEach>
 								
@@ -77,7 +87,7 @@
 				</div>
 				<div class="col-lg-12 col-md-12 col-sm-12">
 					<div class="jumbotron text-center">
-						<a class="back-btn" href="<%=request.getContextPath()%>/IndexServlet">Trở lại
+						<a class="back-btn" href="<%=request.getContextPath()%>/home">Trở lại
 							trang chủ</a>
 					</div>
 				</div>

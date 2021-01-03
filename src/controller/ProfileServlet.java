@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class ProfileServlet
  */
-@WebServlet("/ProfileServlet")
+@WebServlet(name = "/ProfileServlet", urlPatterns= {"/profile"})
 public class ProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -36,8 +36,9 @@ public class ProfileServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Profile.jsp");
 			rd.forward(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Login.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/login");
 		}
 	}
 
@@ -47,8 +48,9 @@ public class ProfileServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/UpdateProfile.jsp");
-		rd.forward(request, response);
+//		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/UpdateProfile.jsp");
+//		rd.forward(request, response);
+		doGet(request, response);
 	}
 
 }

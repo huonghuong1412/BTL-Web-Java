@@ -2,17 +2,32 @@
     margin: 10px 0;
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+    width: 350px;
 }
 
 .form-control label {
     font-size: 1.4rem;
     font-weight: 500;
-    width: 30%;
+    width: 80px;
 }
 
 .form-control input {
     padding: 8px 12px;
-    width: 250px;
+    width: 220px;
+}
+
+.form-message {
+    font-size: 14px;
+    color: red;
+    display: block;
+    margin: 10px 0 5px 80px;
+}
+
+.form-message-error {
+    color: red;
+    font-size: 1.4rem;
+    margin: 5px 0 5px 80px;
 }
 
 /* #username:focus {
@@ -28,7 +43,6 @@
     border: none;
     background-color: var(--red-color);
     color: #fff;
-    margin-top: 20px;
     cursor: pointer;
     text-transform: capitalize;
 }

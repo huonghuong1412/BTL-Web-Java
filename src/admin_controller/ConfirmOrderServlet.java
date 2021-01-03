@@ -34,12 +34,16 @@ public class ConfirmOrderServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		
 		if(session.getAttribute("admin") != null) {
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Order.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Order.jsp");
+//			rd.forward(request, response);
+//			response.sendRedirect(request.getContextPath() + "/listorder");
+			doPost(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/adminlogin");
 		}
 	}
 
@@ -49,11 +53,12 @@ public class ConfirmOrderServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("OrderID"));
 		try {
-			Order order = new OrderDAO().getOrderById(id);
+			Order order = OrderDAO.getOrderById(id);
 			order.setStatus(1);
 			OrderDAO.confirmOrder(order);
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Order.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Order.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/listorder");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

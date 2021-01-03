@@ -78,7 +78,7 @@ public class AddProductServlet extends HttpServlet {
 		product.setDescription(description);
 		product.setMaterial(material);
 		product.setCategoryID(category);
-		product.setImage(image.getSubmittedFileName().toString());;
+		product.setImage(image.getSubmittedFileName().toString());
 		
 		boolean status = ProductDAO.insertProduct(product, conn);
 		if(status) {

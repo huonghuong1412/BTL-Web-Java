@@ -38,8 +38,9 @@ public class LogoutServlet extends HttpServlet {
 		session.removeAttribute("address");
 		session.removeAttribute("phone");
 		session.removeAttribute("cart");
-		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Home.jsp");
-		rd.forward(request, response);
+//		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Home.jsp");
+//		rd.forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/home");
 	}
 
 	/**

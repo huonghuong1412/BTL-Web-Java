@@ -10,13 +10,14 @@ public class History {
 	private double UnitPrice;
 	private Timestamp DateBuy;
 	private double ThanhTien;
+	private int Status;
 
 	public History() {
 
 	}
 
 	public History(String productName, String categoryName, int quantity, double unitPrice, Timestamp dateBuy,
-			double thanhTien) {
+			double thanhTien, int status) {
 		super();
 		ProductName = productName;
 		CategoryName = categoryName;
@@ -24,6 +25,7 @@ public class History {
 		UnitPrice = unitPrice;
 		DateBuy = dateBuy;
 		ThanhTien = thanhTien;
+		Status = status;
 	}
 
 	public String getProductName() {
@@ -74,4 +76,13 @@ public class History {
 		ThanhTien = thanhTien;
 	}
 
+	public int getStatus() {
+		return Status;
+	}
+
+	public void setStatus(int status) {
+		Status = status;
+	}
+
+	
 }

@@ -11,6 +11,8 @@ import common.ConnectDB;
 import models.History;
 import models.Order;
 import models.OrderDetail;
+import models.ReportCustomer;
+import models.ReportProduct;
 
 public class OrderDAO {
 
@@ -45,7 +47,7 @@ public class OrderDAO {
 	public static List<History> getListOrderByCustomer(Connection conn, int customerID) {
 		List<History> list = new ArrayList<History>();
 		PreparedStatement state = null;
-		String sql = "SELECT product.ProductName, category.CategoryName, `order`.Quantity, `order`.UnitPrice, `order`.DateBuy, `order`.UnitPrice*`order`.Quantity as ThanhTien\r\n"
+		String sql = "SELECT product.ProductName, category.CategoryName, `order`.Quantity, `order`.UnitPrice, `order`.DateBuy, `order`.UnitPrice*`order`.Quantity as ThanhTien, `order`.`Status`\r\n"
 				+ "FROM `order`, product, category\r\n" + "where product.ProductID = `order`.ProductID\r\n"
 				+ "and product.CategoryID = category.CategoryID\r\n" + "and `order`.CustomerID = " + customerID;
 		try {
@@ -58,7 +60,8 @@ public class OrderDAO {
 				double unitPrice = rs.getDouble("UnitPrice");
 				Timestamp dateBuy = rs.getTimestamp("DateBuy");
 				double thanhTien = rs.getDouble("ThanhTien");
-				list.add(new History(productName, categoryName, quantity, unitPrice, dateBuy, thanhTien));
+				int status = rs.getInt("Status");
+				list.add(new History(productName, categoryName, quantity, unitPrice, dateBuy, thanhTien, status));
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -115,11 +118,9 @@ public class OrderDAO {
 	public static OrderDetail getOrderDetailById(Connection conn, int id) {
 		OrderDetail orderDetail = null;
 		PreparedStatement state = null;
-		String sql = "SELECT `order`.OrderID, customer.FullName, product.ProductName, `order`.Quantity, `order`.UnitPrice, `order`.`Status`, `order`.Phone, `order`.Address \r\n" + 
-				"from `order`, product, customer\r\n" + 
-				"where customer.CustomerID = `order`.CustomerID\r\n" + 
-				"and product.ProductID = `order`.ProductID\r\n" + 
-				"and `order`.OrderID = " + id;
+		String sql = "SELECT `order`.OrderID, customer.FullName, product.ProductName, `order`.Quantity, `order`.UnitPrice, `order`.`Status`, `order`.Phone, `order`.Address \r\n"
+				+ "from `order`, product, customer\r\n" + "where customer.CustomerID = `order`.CustomerID\r\n"
+				+ "and product.ProductID = `order`.ProductID\r\n" + "and `order`.OrderID = " + id;
 		try {
 			state = conn.prepareStatement(sql);
 			ResultSet rs = state.executeQuery();
@@ -132,15 +133,16 @@ public class OrderDAO {
 				int status = rs.getInt("Status");
 				String phone = rs.getString("Phone");
 				String address = rs.getString("Address");
-				orderDetail = new OrderDetail(orderID, fullName, productName, quantity, tongTien, status, phone, address);
+				orderDetail = new OrderDetail(orderID, fullName, productName, quantity, tongTien, status, phone,
+						address);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return orderDetail;
 	}
-	
-	public static Order getOrderById (int id) {
+
+	public static Order getOrderById(int id) {
 		Order order = null;
 		Connection conn = ConnectDB.getConnection();
 		PreparedStatement state = null;
@@ -149,7 +151,7 @@ public class OrderDAO {
 			state = conn.prepareStatement(sql);
 			state.setInt(1, id);
 			ResultSet rs = state.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				int customerID = rs.getInt("CustomerID");
 				int productID = rs.getInt("ProductID");
 				double unitPrice = rs.getDouble("UnitPrice");
@@ -159,34 +161,164 @@ public class OrderDAO {
 				String note = rs.getString("Note");
 				String phone = rs.getString("Phone");
 				String address = rs.getString("Address");
-				
-				order = new Order(id, customerID, productID, unitPrice, quantity, status, dateBuy, note, phone, address);
+
+				order = new Order(id, customerID, productID, unitPrice, quantity, status, dateBuy, note, phone,
+						address);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return order;
 	}
-	
+
 	public static boolean confirmOrder(Order order) {
-		
+
 		Connection conn = ConnectDB.getConnection();
 		PreparedStatement state = null;
-		String sql = "update `order` set `Status` = 1 where OrderID = ?"; 
+		String sql = "UPDATE `order` SET `Status` = '1' WHERE `OrderID`=?";
+		String sql2 = "update `order`, product\r\n" + "set product.Quantity = product.Quantity - `order`.Quantity\r\n"
+				+ "where `order`.ProductID = product.ProductID\r\n" + "and `order`.`Status` = 1 and OrderID=?";
 		try {
-			
+
 			state = conn.prepareStatement(sql);
 			state.setInt(1, order.getOrderID());
 			int status = state.executeUpdate();
-			if(status == 0) {
+			if (status == 0) {
 				return false;
+			} else {
+				state = conn.prepareStatement(sql2);
+				state.setInt(1, order.getOrderID());
+				state.executeUpdate();
+				return true;
 			}
-			
-			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			return false;
 		}
+	}
+
+	public static boolean cancelOrder(Order order) {
+
+		Connection conn = ConnectDB.getConnection();
+		PreparedStatement state = null;
+		String sql = "UPDATE `order` SET `Status` = '2' WHERE `OrderID`=?";
+		try {
+
+			state = conn.prepareStatement(sql);
+			state.setInt(1, order.getOrderID());
+			int status = state.executeUpdate();
+			if (status == 0) {
+				return false;
+			} else {
+				return true;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return false;
+		}
+	}
+
+	public static List<ReportCustomer> reportOrderByCustomer(Connection conn) {
+		List<ReportCustomer> list = new ArrayList<ReportCustomer>();
+
+		PreparedStatement state = null;
+		String sql = "select customer.CustomerID, customer.FullName, customer.Address, customer.Phone, count(`order`.Quantity) as Times\r\n"
+				+ "from customer, `order`\r\n" + "where customer.CustomerID = `order`.CustomerID\r\n"
+				+ "group by (`order`.CustomerID)";
+		try {
+			state = conn.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+				ReportCustomer reportCustomer = new ReportCustomer();
+				reportCustomer.setCustomerID(rs.getInt("CustomerID"));
+				reportCustomer.setFullName(rs.getString("FullName"));
+				reportCustomer.setAddress(rs.getString("Address"));
+				reportCustomer.setPhone(rs.getString("Phone"));
+				reportCustomer.setTimes(rs.getInt("Times"));
+				list.add(reportCustomer);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return list;
+	}
+
+	public static List<ReportProduct> reportOrderByProduct(Connection conn) {
+		List<ReportProduct> list = new ArrayList<ReportProduct>();
+
+		PreparedStatement state = null;
+		String sql = "select product.ProductID, product.ProductName, product.Price, category.CategoryName, sum(`order`.Quantity) as Times\r\n" + 
+				"from product, category, `order`\r\n" + 
+				"where product.ProductID = `order`.ProductID\r\n" + 
+				"and product.CategoryID = category.CategoryID\r\n" + 
+				"and `order`.`Status` = 1\r\n" + 
+				"group by (`order`.ProductID)";
+		try {
+			state = conn.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			while (rs.next()) {
+				ReportProduct report = new ReportProduct();
+				report.setProductID(rs.getInt("ProductID"));
+				report.setProductName(rs.getString("ProductName"));
+				report.setPrice(rs.getDouble("Price"));
+				report.setCategoryName(rs.getString("CategoryName"));
+				report.setTimes(rs.getInt("Times"));
+				list.add(report);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+		return list;
+	}
+
+	public static int getTotalOrder(Connection conn) {
+		int count = 0;
+		PreparedStatement state = null;
+		String sql = "select sum(A.Times) as Tong \r\n" + 
+				"from (\r\n" + 
+				"	select sum(`order`.Quantity) as Times\r\n" + 
+				"	from product, `order`\r\n" + 
+				"	where product.ProductID = `order`.ProductID\r\n" + 
+				"    and `order`.`Status` = 1\r\n" + 
+				"	group by (`order`.ProductID)\r\n" + 
+				") as A\r\n" + 
+				"";
+		try {
+			state = conn.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			rs.next();
+			count = rs.getInt("Tong");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return count;
+	}
+	
+	public static double getTotalPrice(Connection conn) {
+		double total = 0;
+		PreparedStatement state = null;
+		String sql = "select sum(A.Total) as Tong \r\n" + 
+				"from (\r\n" + 
+				"	select sum(`order`.UnitPrice * `order`.Quantity) as Total\r\n" + 
+				"	from product, `order`\r\n" + 
+				"	where product.ProductID = `order`.ProductID\r\n" + 
+				"    and `order`.`Status` = 1\r\n" + 
+				"	group by (`order`.ProductID)\r\n" + 
+				") as A\r\n" + 
+				"";
+		try {
+			state = conn.prepareStatement(sql);
+			ResultSet rs = state.executeQuery();
+			rs.next();
+			total = rs.getInt("Tong");
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return total;
 	}
 
 }

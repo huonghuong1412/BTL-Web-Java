@@ -6,6 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png"
+	type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -62,15 +64,38 @@
 								</span>
 							</div>
 							<div class="variants clearfix">
-								<div class="selector-wrapper">
-									<label>Số lượng</label> <input id="quantity"
-										class="selector-wrapper-input" type="number" name="quantity"
-										min="1" value="1">
-								</div>
-								<div class="add-item-btn">
-									<a id="add-to-cart" class="btn-detail btn-color-add" href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }"
-										name="add">Thêm vào giỏ</a>
-								</div>
+								<form action="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }" method="post">
+									<div class="selector-wrapper">
+										<label>Số lượng</label> <input id="quantity"
+											class="selector-wrapper-input" type="number" name="quantity"
+											min="1" max="${product.quantity/2}" value="1">
+									</div>
+									<div class="add-item-btn">
+										<button id="add-to-cart" class="btn-detail btn-color-add" type="submit">Thêm vào giỏ</button>
+									</div>
+								</form>
+								<c:if test="${like== 0}">
+									<div class="add-item-btn" title="Yêu thích">
+										<a
+											href="<%=request.getContextPath()%>/FavouriteServlet?action=add&ProductID=${product.productID}">
+											<img
+											src="https://cdn2.iconfinder.com/data/icons/4web-3/139/favourite-512.png"
+											alt="like" width="50" />
+										</a>
+
+									</div>
+								</c:if>
+								<c:if test="${like!=0}">
+									<div class="add-item-btn" title="Bỏ thích">
+										<a
+											href="<%=request.getContextPath()%>/FavouriteServlet?action=remove&ProductID=${product.productID}">
+											<img
+											src="https://banner2.cleanpng.com/20180318/plw/kisspng-love-heart-love-heart-romance-clip-art-picture-of-red-heart-5aaeb7181ca327.7123730415213995761173.jpg"
+											alt="like" width="60" />
+										</a>
+									</div>
+								</c:if>
+								<%-- <span>${like}</span> --%>
 							</div>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12">

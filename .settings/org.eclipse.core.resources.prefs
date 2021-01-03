@@ -5,5 +5,6 @@ encoding//WebContent/views/frontend/Footer.jsp=UTF-8
 encoding//WebContent/views/frontend/Header.jsp=UTF-8
 encoding//WebContent/views/frontend/UpdateProfile.jsp=UTF-8
 encoding//src/admin_controller/AddProductServlet.java=UTF-8
+encoding//src/admin_controller/AdminLoginServlet.java=UTF-8
 encoding//src/controller/LoginServlet.java=UTF-8
 encoding//src/controller/RegisterServlet.java=UTF-8

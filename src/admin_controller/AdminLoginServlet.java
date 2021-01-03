@@ -18,7 +18,7 @@ import common.HashPassword;
 /**
  * Servlet implementation class AdminLoginServlet
  */
-@WebServlet("/AdminLoginServlet")
+@WebServlet(name = "/AdminLoginServlet", urlPatterns = {"/adminlogin"})
 public class AdminLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,12 +37,14 @@ public class AdminLoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (session.getAttribute("user") != null) {
-			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
-			dispatch.forward(request, response);
+		if (session.getAttribute("admin") != null) {
+//			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
+//			dispatch.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/adminhome");
 		} else {
 			RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Login.jsp");
 			dispatch.forward(request, response);
+//			response.sendRedirect(request.getContextPath() + "/adminlogin");
 		}
 	}
 
@@ -57,7 +59,7 @@ public class AdminLoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		
 		try {
-			password = HashPassword.hashMD5(password.toCharArray());
+			password = HashPassword.hashPassword(password);
 			
 			if (AdminDAO.login(username, password)) {
 				HttpSession session = request.getSession();
@@ -73,6 +75,7 @@ public class AdminLoginServlet extends HttpServlet {
 				RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
 				dispatch.forward(request, response);
 			} else {
+				request.setAttribute("message", "Tài khoản không tồn tại");
 				RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Login.jsp");
 				dispatch.forward(request, response);
 			}

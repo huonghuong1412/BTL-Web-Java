@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -38,13 +39,7 @@
 									value="<%=session.getAttribute("username")%>"
 									readonly="readonly">
 							</div>
-							<div class="form-control">
-								<label>Password: </label> <input type="password" name="password" id="password" required=""
-									value="<%=session.getAttribute("password")%>">
-							</div>
-							<div class="form-control">
-								<label>Confirm: </label> <input type="password" id="passwordConfirm" required="" name="passwordConfirm" placeholder="Mật khẩu">
-							</div>
+							<input type="hidden" name="password" id="password" value="<%=session.getAttribute("password")%>" required="" placeholder="Mật khẩu">
 							<div class="form-control">
 								<label>Name: </label> <input type="text" name="fullname" id="fullname" required=""
 									value="<%=session.getAttribute("fullname")%>">
@@ -59,7 +54,7 @@
 							</div>
 							<div>
 								<input type="submit" value="Cập nhật" class="signup-btn" onclick="checkRegister()">
-								<a href="<%=request.getContextPath()%>/ProfileServlet" class="btn-cancel">Huỷ</a>
+								<a href="<%=request.getContextPath()%>/profile" class="btn-cancel">Huỷ</a>
 							</div>
 						</form>
 					</div>

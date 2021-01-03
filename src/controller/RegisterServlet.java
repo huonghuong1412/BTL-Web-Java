@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.CustomerDAO;
 import common.ConnectDB;
@@ -18,7 +19,7 @@ import common.HashPassword;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet("/RegisterServlet")
+@WebServlet(name = "/RegisterServlet", urlPatterns= {"/register"})
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -38,8 +39,16 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Register.jsp");
-		dispatch.forward(request, response);
+		HttpSession session = request.getSession();
+		if (session.getAttribute("user") != null) {
+//			RequestDispatcher dispatch = request.getRequestDispatcher("/views/frontend/Home.jsp");
+//			dispatch.forward(request, response);
+			response.sendRedirect(request.getContextPath()+"/home");
+		} 
+		else {
+			RequestDispatcher dispatch = request.getRequestDispatcher("/views/frontend/Register.jsp");
+			dispatch.forward(request, response);
+		}
 	}
 
 	/**
@@ -59,14 +68,15 @@ public class RegisterServlet extends HttpServlet {
 		Connection conn = ConnectDB.getConnection();
 
 		try {
-			password = HashPassword.hashMD5(password.toCharArray());
+			password = HashPassword.hashPassword(password);
 
 			if (CustomerDAO.register(username, password, fullname, address, phone, conn) == true) {
-				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Login.jsp");
-				dispatch.forward(request, response);
+//				RequestDispatcher dispatch = request.getRequestDispatcher("/views/frontend/Login.jsp");
+//				dispatch.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/login");
 			} else {
 				request.setAttribute("message", "Tài khoản đã tồn tại");
-				RequestDispatcher dispatch = request.getRequestDispatcher("views/frontend/Register.jsp");
+				RequestDispatcher dispatch = request.getRequestDispatcher("/views/frontend/Register.jsp");
 				dispatch.forward(request, response);
 			}
 

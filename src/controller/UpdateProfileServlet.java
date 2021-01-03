@@ -50,22 +50,21 @@ public class UpdateProfileServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String username = request.getParameter("username");
-		String password = request.getParameter("password");
 		String fullname = request.getParameter("fullname");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		
 		Connection conn = ConnectDB.getConnection();
-		if(CustomerDAO.updateProfile(id, username, password, fullname, address, phone, conn)) {
+		if(CustomerDAO.updateProfile(id, username, fullname, address, phone, conn)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("id", id);
 			session.setAttribute("username", username);
-			session.setAttribute("password", password);
 			session.setAttribute("fullname", fullname);
 			session.setAttribute("address", address);
 			session.setAttribute("phone", phone);
-			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Profile.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Profile.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/profile");
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("views/frontend/UpdateProfile.jsp");
 			rd.forward(request, response);

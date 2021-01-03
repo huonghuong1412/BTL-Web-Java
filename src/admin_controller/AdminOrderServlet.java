@@ -20,7 +20,7 @@ import models.Order;
 /**
  * Servlet implementation class AdminOrderServlet
  */
-@WebServlet("/AdminOrderServlet")
+@WebServlet(name = "/AdminOrderServlet", urlPatterns = {"/listorder"})
 public class AdminOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -40,8 +40,9 @@ public class AdminOrderServlet extends HttpServlet {
 		if(session.getAttribute("admin") != null) {
 			doPost(request, response);
 		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
-			rd.forward(request, response);
+//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");
+//			rd.forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/adminlogin");
 		}
 	}
 
