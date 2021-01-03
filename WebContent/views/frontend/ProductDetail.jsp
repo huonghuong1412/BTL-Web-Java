@@ -41,7 +41,17 @@
 									class="fa fa-caret-down"></i>
 								</span>
 							</h3>
-							<%@include file="Category.jsp"%>
+							<ul class="sidebar__inner--menu">
+								<li><a class="sidebar__inner--link"
+									href="<%=request.getContextPath()%>/ListProductServlet?category=all">Tất
+										cả sản phẩm</a></li>
+								<c:forEach var="category" items="${categories }">
+
+									<li><a class="sidebar__inner--link"
+									href="<%=request.getContextPath()%>/ListProductServlet?category=${category.categoryName}">${category.categoryName}</a></li>
+								</c:forEach>
+
+							</ul>
 						</div>
 					</div>
 				</div>

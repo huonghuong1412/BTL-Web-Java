@@ -7,7 +7,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon" href="views/frontend/img/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="views/frontend/img/favicon.png"
+	type="image/png" />
 <link rel="stylesheet" href="views/frontend/css/reset.css">
 <link rel="stylesheet" href="views/frontend/css/all.min.css">
 <link rel="stylesheet" href="views/frontend/css/grid.css">
@@ -43,8 +44,17 @@
 									class="fa fa-caret-down"></i>
 								</span>
 							</h3>
-							<%@include file="Category.jsp"%>
-							
+							<ul class="sidebar__inner--menu">
+								<li><a class="sidebar__inner--link"
+									href="<%=request.getContextPath()%>/ListProductServlet?category=all">Tất
+										cả sản phẩm</a></li>
+								<c:forEach var="category" items="${categories }">
+
+									<li><a class="sidebar__inner--link"
+									href="<%=request.getContextPath()%>/ListProductServlet?category=${category.categoryName}">${category.categoryName}</a></li>
+								</c:forEach>
+
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -71,7 +81,8 @@
 													</a>
 													<div class="products__item--actions">
 														<div class="products__item--actions-cart">
-															<a href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }"
+															<a
+																href="<%=request.getContextPath()%>/CartServlet?command=addCart&ProductID=${product.productID }"
 																class="products__item--actions-link" id="button-bag">
 																<i class="fa fa-shopping-bag"></i>
 															</a>
@@ -136,23 +147,23 @@
 	<script src="views/frontend/js/all.min.js"></script>
 	<script src="views/frontend/js/main.js"></script>
 	<script>
-        var modal = document.getElementById('myModal');
-        var btn = document.getElementById('button-bag')
-        var span = document.getElementsByClassName("close")[0];
+		var modal = document.getElementById('myModal');
+		var btn = document.getElementById('button-bag')
+		var span = document.getElementsByClassName("close")[0];
 
-        btn.onclick = function () {
-            modal.style.display = "block";
-        }
-        span.onclick = function () {
-            modal.style.display = "none";
-        }
+		btn.onclick = function() {
+			modal.style.display = "block";
+		}
+		span.onclick = function() {
+			modal.style.display = "none";
+		}
 
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+	</script>
 </body>
 </html>

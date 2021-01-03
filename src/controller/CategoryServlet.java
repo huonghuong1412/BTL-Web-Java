@@ -34,10 +34,13 @@ public class CategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		 String userPath = request.getServletPath();
+		 System.out.print(userPath);
 		Connection conn = ConnectDB.getConnection();
-		List<Category> listCategory =  CategoryDAO.getListCategory(conn);
-		request.setAttribute("categories", listCategory);
+		System.out.print("ABC");
+		List<Category> list = CategoryDAO.getListCategory(conn);
+		System.out.print(list);
+		request.setAttribute("categories", list);
 		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Category.jsp");
 		rd.forward(request, response);
 	}
@@ -46,11 +49,8 @@ public class CategoryServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		List<Category> list = CategoryDAO.getAllCategory();
-//		request.setAttribute("categories", list);
-//		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/Category.jsp");
-//		rd.forward(request, response);
-		doPost(request, response);
+		
+		doGet(request, response);
 	}
 
 }

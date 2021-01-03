@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.CategoryDAO;
 import DAO.ProductDAO;
 import common.ConnectDB;
+import models.Category;
 import models.Product;
 
 /**
@@ -44,7 +46,9 @@ public class ListProductServlet extends HttpServlet {
 		Connection conn = ConnectDB.getConnection();
 		String category = request.getParameter("category");
 		List<Product> listProduct = null;
+		List<Category> list = CategoryDAO.getListCategory(conn);
 		String page = request.getParameter("page");
+		request.setAttribute("categories", list);
 		if (page == null) {
 			listProduct = ProductDAO.getListProductByCategory(conn, category, 1);
 			request.setAttribute("products", listProduct);

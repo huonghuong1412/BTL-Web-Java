@@ -44,7 +44,7 @@ public class CategoryDAO {
 		List<Category> lstcate = new ArrayList<Category>();
 		PreparedStatement ptmt = null;
 
-		String sql = "select * from category";
+		String sql = "SELECT * FROM webbanhang.category;";
 
 		try {
 			ptmt = conn.prepareStatement(sql);
@@ -56,7 +56,7 @@ public class CategoryDAO {
 				pro.setCategoryName(rs.getString("CategoryName"));
 				lstcate.add(pro);
 			}
-			ptmt.close();
+//			ptmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

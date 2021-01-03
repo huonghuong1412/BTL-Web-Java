@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,9 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import DAO.CategoryDAO;
 import DAO.FavoriteDAO;
 import DAO.ProductDAO;
 import common.ConnectDB;
+import models.Category;
 import models.Product;
 
 /**
@@ -49,8 +52,9 @@ public class DetailProductServlet extends HttpServlet {
 		int id = Integer.parseInt(request.getParameter("id"));
 		Product product = ProductDAO.getProductById(id);
 		request.setAttribute("product", product);
-
 		Connection conn = ConnectDB.getConnection();
+		List<Category> list = CategoryDAO.getListCategory(conn);
+		request.setAttribute("categories", list);
 		HttpSession session = request.getSession();
 
 		// da dang nhap
@@ -62,7 +66,6 @@ public class DetailProductServlet extends HttpServlet {
 
 		}
 		request.setAttribute("like", like);
-		System.out.println("like: " + like);
 		// System.out.println(idCustomer);
 		RequestDispatcher rd = request.getRequestDispatcher("views/frontend/ProductDetail.jsp");
 		rd.forward(request, response);
