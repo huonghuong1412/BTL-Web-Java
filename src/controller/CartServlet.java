@@ -104,7 +104,7 @@ public class CartServlet extends HttpServlet {
 	// add to cart
 	private String addTocart(Product product, int quantity) {
 		for (Cart item : cart) {
-			if (item.getProduct().getProductID() == product.getProductID() && item.getQuantity() < product.getQuantity()) {
+			if (item.getProduct().getProductID() == product.getProductID()) {
 				item.setQuantity(item.getQuantity() + 1);
 				return "cart";
 			}

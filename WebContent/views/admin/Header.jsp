@@ -13,7 +13,7 @@
 		</div>
 
 		<c:choose>
-			<c:when test="${sessionScope.user != null}">
+			<c:when test="${sessionScope.admin != null}">
 				<ul class="menu">
 					<li class="menu-item"><a class="menu-link"
 						href="<%=request.getContextPath()%>/AdminProductServlet">Sản

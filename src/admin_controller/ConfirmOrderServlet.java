@@ -36,9 +36,6 @@ public class ConfirmOrderServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		if(session.getAttribute("admin") != null) {
-//			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Order.jsp");
-//			rd.forward(request, response);
-//			response.sendRedirect(request.getContextPath() + "/listorder");
 			doPost(request, response);
 		} else {
 //			RequestDispatcher rd = request.getRequestDispatcher("views/admin/Login.jsp");

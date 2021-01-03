@@ -63,7 +63,6 @@ public class AdminLoginServlet extends HttpServlet {
 			
 			if (AdminDAO.login(username, password)) {
 				HttpSession session = request.getSession();
-				session.setAttribute("user", "admin");
 				session.setAttribute("admin", "dmin avdvsdvsd");
 				
 				session.setMaxInactiveInterval(30*60);
@@ -72,8 +71,9 @@ public class AdminLoginServlet extends HttpServlet {
 				loginCookie.setMaxAge(30 * 60); // 30 phut
 				response.addCookie(loginCookie);
 				
-				RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
-				dispatch.forward(request, response);
+//				RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Home.jsp");
+//				dispatch.forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/adminhome");
 			} else {
 				request.setAttribute("message", "Tài khoản không tồn tại");
 				RequestDispatcher dispatch = request.getRequestDispatcher("views/admin/Login.jsp");
