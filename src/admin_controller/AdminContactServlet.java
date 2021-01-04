@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import DAO.CategoryDAO;
 import DAO.ContactDAO;
 import common.ConnectDB;
-import models.Category;
 import models.Contact;
 
 /**

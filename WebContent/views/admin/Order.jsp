@@ -78,7 +78,8 @@
 										</c:choose>
 									</td>
 									<td>
-										${order.dateBuy }
+										<fmt:formatDate
+												value="${order.dateBuy }" pattern="dd-MM-YYYY HH:mm:ss" />
 									</td>
 									<td style="display: flex; align-items: center; justify-content: space-between">
 									<a class="btn-edit" href="<%=request.getContextPath()%>/AdminDetailOrderServlet?OrderID=${order.orderID}">Xem</a> 

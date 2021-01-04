@@ -58,10 +58,15 @@
 									<p class="form-message-error">Mật khẩu cũ không chính xác</p>
 								</div>
 							</c:if>
+							<c:if test="${success != null}">
+								<div class="form-control">
+									<p class="form-message-error">Đổi mật khẩu thành công.</p>
+								</div>
+							</c:if>
 							<div>
 								<input type="submit" value="Cập nhật" class="signup-btn"
 									onclick="checkUpdate()"> <a
-									href="<%=request.getContextPath()%>/profile" class="btn-cancel">Huỷ</a>
+									href="<%=request.getContextPath()%>/profile" class="btn-cancel">Trở lại</a>
 							</div>
 						</form>
 					</div>

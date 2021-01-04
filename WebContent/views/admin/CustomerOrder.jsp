@@ -64,7 +64,8 @@
 										<th style="border: 1px solid rgb(0, 0, 0);">
 											${history.thanhTien}</th>
 										<th style="border: 1px solid rgb(0, 0, 0);">
-											${history.dateBuy}</th>
+										<fmt:formatDate
+												value="${history.dateBuy}" pattern="dd-MM-YYYY HH:mm:ss" />
 										<th style="border: 1px solid rgb(0, 0, 0);"><c:choose>
 												<c:when test="${history.status == 0}">Chưa giao hàng</c:when>
 												<c:when test="${history.status == 1}">Đã nhận hàng</c:when>

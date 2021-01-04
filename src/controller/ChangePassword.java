@@ -65,9 +65,11 @@ public class ChangePassword extends HttpServlet {
 			if (oldPass.equals(session.getAttribute("password")) == true) {
 				newPassword = HashPassword.hashPassword(newPassword);
 				if (CustomerDAO.changePassword(id, newPassword, conn)) {
-
 					session.setAttribute("id", id);
-					response.sendRedirect(request.getContextPath() + "/profile");
+					request.setAttribute("success", "ok");
+//					response.sendRedirect(request.getContextPath() + "/profile");
+					RequestDispatcher rd = request.getRequestDispatcher("views/frontend/ChangePassword.jsp");
+					rd.forward(request, response);
 				} else {
 					RequestDispatcher rd = request.getRequestDispatcher("views/frontend/ChangePassword.jsp");
 					rd.forward(request, response);

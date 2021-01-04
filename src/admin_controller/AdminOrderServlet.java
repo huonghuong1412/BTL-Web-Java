@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.OrderDAO;
-import DAO.ProductDAO;
 import common.ConnectDB;
 import models.Order;
 

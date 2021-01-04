@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="shortcut icon" href="views/admin/img/favicon.png" type="image/png" />
+<link rel="shortcut icon" href="views/admin/img/favicon.png"
+	type="image/png" />
 <link rel="stylesheet" href="views/admin/css/reset.css">
 <link rel="stylesheet" href="views/admin/css/all.min.css">
 <link rel="stylesheet" href="views/admin/css/grid.css">
@@ -28,8 +29,7 @@
 
 	<div class="container">
 
-		<br>
-		<br>
+		<br> <br>
 		<form
 			action="<%=request.getContextPath()%>/UpdateProductServlet?id=${product.productID}"
 			method="post" style="width: 100%">
@@ -76,10 +76,12 @@
 					value="${product.image }" name="Image" required="">
 			</div>
 			<div class="form-group">
-				<label for="add-productFormName" class="">Mô tả</label> <input
-					required="" type="text" class="form-control input-lg"
+				<label for="add-productFormName" class="">Mô tả</label>
+				<textarea required="" row="3" class="form-control input-lg"
 					value="${product.description }" name="Description"
 					placeholder="Mô tả sản phẩm">
+					${product.description }
+					</textarea>
 			</div>
 			<div class="form-group">
 				<label for="add-productFormName" class="">Chất liệu</label> <input
